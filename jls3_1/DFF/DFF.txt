@@ -1,0 +1,93 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity dff is
+    Port (
+        clk     : in  STD_LOGIC;      
+        reset : in  STD_LOGIC;       
+        d       : in  STD_LOGIC;         
+        q : out std_logic := '0'          
+    );
+end dff;
+
+architecture Behavioral of dff is
+begin
+    process (clk, reset)
+    begin
+        if reset = '0' then
+            q <= '0';                   
+        elsif rising_edge(clk) then     
+            q <= d;
+        end if;
+    end process;
+end Behavioral;
+
+
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity DFFTb is
+end DFFTb;
+
+architecture behavior of DFFTb is
+
+    signal clk,d,reset,q : std_logic;
+
+begin
+
+uut: entity work.dff
+port map(
+clk => clk,
+d => d,
+reset => reset,
+q=>q
+);
+
+process
+begin
+
+d <= '0';
+reset <= '1';
+clk <= '0';
+wait for 30 ns;
+
+d <= '0';
+wait for 10 ns;
+
+clk <= '1';
+wait for 40 ns;
+
+clk <= '0';
+wait for 40 ns;
+
+clk <= '1';
+wait for 30 ns;
+
+d <= '1';
+wait for 10 ns;
+
+clk <= '0';
+wait for 30 ns;
+
+d <= '1';
+wait for 10 ns;
+
+clk <= '1';
+wait for 40 ns;
+
+clk <= '0';
+wait for 20 ns;
+
+reset <= '0';
+wait for 20 ns;
+
+clk <= '1';
+wait for 40 ns;
+
+wait;
+
+end process;
+
+end behavior;

@@ -1,0 +1,52 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity CLA_4bit_TB is
+end CLA_4bit_TB;
+
+architecture Behavioral of CLA_4bit_TB is
+    signal A     : STD_LOGIC_VECTOR (3 downto 0);
+    signal B     : STD_LOGIC_VECTOR (3 downto 0);
+    signal Cin   : STD_LOGIC;
+    signal Sum   : STD_LOGIC_VECTOR (3 downto 0);
+    signal Cout  : STD_LOGIC;
+
+    component CLA_4bit
+        Port ( A     : in  STD_LOGIC_VECTOR (3 downto 0);
+               B     : in  STD_LOGIC_VECTOR (3 downto 0);
+               Cin   : in  STD_LOGIC;
+               Sum   : out STD_LOGIC_VECTOR (3 downto 0);
+               Cout  : out STD_LOGIC);
+    end component;
+begin
+    UUT: CLA_4bit port map (A, B, Cin, Sum, Cout);
+
+    process
+    begin
+        -- 0 + 0 + 0
+        A <= "0000"; B <= "0000"; Cin <= '0';
+        wait for 10 ns;
+        
+        -- 5 + 3 + 0
+        A <= "0011"; B <= "0101"; Cin <= '0';
+        wait for 10 ns;
+        
+        -- 8 + 7
+        A <= "0111"; B <= "1000"; Cin <= '0';
+        wait for 10 ns;
+        
+        -- 10 + 5 + 1 
+        A <= "1010"; B <= "0101"; Cin <= '1';
+        wait for 10 ns;
+        
+        -- 15 + 15 + 1
+        A <= "1111"; B <= "1111"; Cin <= '1';
+        wait for 10 ns;
+        
+        -- 9 + 6
+        A <= "1001"; B <= "0110"; Cin <= '0';
+        wait for 10 ns;
+        
+        wait;
+    end process;
+end Behavioral;

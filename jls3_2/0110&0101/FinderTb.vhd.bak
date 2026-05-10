@@ -1,0 +1,94 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_sequence_detector is
+  
+end tb_sequence_detector;
+
+architecture Behavioral of tb_sequence_detector is
+
+    component sequence_detector
+        Port (
+            clk     : in  STD_LOGIC;
+            reset : in  STD_LOGIC;
+            din     : in  STD_LOGIC;
+            detected : out STD_LOGIC
+        );
+    end component;
+
+
+    signal clk     : STD_LOGIC := '0';
+    signal reset : STD_LOGIC := '1';
+    signal din     : STD_LOGIC := '0';
+    signal detected : STD_LOGIC;
+
+
+    constant clk_period : time := 10 ns;
+
+begin
+
+    uut: sequence_detector
+        Port map (
+            clk     => clk,
+            reset => reset,
+            din     => din,
+            detected => detected
+        );
+
+    clk_process: process
+    begin
+        clk <= '0';
+        wait for clk_period / 2;
+        clk <= '1';
+        wait for clk_period / 2;
+    end process;
+
+
+    stimulus_process: process
+    begin
+
+        reset <= '0';
+        wait for 20 ns;
+        reset <= '1';
+        wait for 20 ns;
+
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '0'; wait for clk_period;  -- 0110
+
+        wait for 40 ns;
+  
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;  -- 0101
+
+
+
+        din <= '0'; wait for clk_period;
+
+        -- reset test
+        reset <= '0';
+        wait for 20 ns;
+        reset<= '1';
+        wait for 20 ns;
+
+
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '0'; wait for clk_period;  -- 0110
+ 
+        wait for 40 ns;
+
+
+        din <= '1'; wait for clk_period;  
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;  -- 0101
+
+  
+        wait;
+    end process;
+
+end Behavioral;

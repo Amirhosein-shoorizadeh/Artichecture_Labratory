@@ -1,0 +1,108 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity full_adder is
+  Port(
+    i0, i1, cin : in  std_logic;
+    s,  cout    : out std_logic
+  );
+end entity full_adder;
+
+architecture structure of full_adder is
+
+  component or_gate is
+    Port(
+      A, B : in  std_logic;
+      C    : out std_logic
+    );
+  end component or_gate;
+
+  component half_adder is
+    Port(
+      in1, in2 : in  std_logic;
+      sum, carry : out std_logic
+    );
+  end component half_adder;
+
+  -- 
+  signal s1, c1, c2 : std_logic;
+
+begin
+
+  ha0: half_adder
+    port map (
+      in1 => i0,
+      in2 => i1,
+      sum => s1,
+      carry => c1
+    );
+
+  ha1: half_adder
+    port map (
+      in1 => s1,
+      in2 => cin,
+      sum => s,
+      carry => c2
+    );
+
+  -- carryout
+  or0: or_gate
+    port map (
+      A => c1,
+      B => c2,
+      C => cout
+    );
+
+end structure;
+
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity tb_full_adder is
+end entity tb_full_adder;
+
+architecture tb of tb_full_adder is
+
+    component full_adder is
+      Port(
+        i0, i1, cin : in  std_logic;
+        s,  cout    : out std_logic
+      );
+    end component;
+
+    signal t_i0, t_i1, t_cin : std_logic := '0';
+    signal t_s, t_cout : std_logic;
+
+begin
+
+    uut: full_adder
+        port map (
+            i0  => t_i0,
+            i1  => t_i1,
+            cin => t_cin,
+            s   => t_s,
+            cout=> t_cout
+        );
+
+    stim_proc : process
+    begin
+        
+        t_i0 <= '0'; t_i1 <= '0'; t_cin <= '0';
+        wait for 20 ns;
+
+        t_i0 <= '0'; t_i1 <= '1'; t_cin <= '0';
+        wait for 20 ns;
+
+        t_i0 <= '1'; t_i1 <= '0'; t_cin <= '1';
+        wait for 20 ns;
+
+        t_i0 <= '1'; t_i1 <= '1'; t_cin <= '1';
+        wait for 20 ns;
+
+        wait;  
+    end process;
+
+end architecture;
+
+

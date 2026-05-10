@@ -1,0 +1,113 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Azmemary/dedcoder
+T_opt
+!s110 1776595816
+V39A]jRN6DJdfE<LO5S0SL1
+Z1 04 10 8 work tb_mux4to1 behavior 1
+=1-04ecd8c4ec49-69e4b367-390-5a68
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+R0
+T_opt1
+!s110 1776596445
+V[9UK2d9k:PX5LlIg]TaQ@1
+R1
+=1-04ecd8c4ec49-69e4b5dc-31d-1c0
+o-quiet -auto_acc_if_foreign -work work
+R2
+n@_opt1
+R3
+Emux4to1
+Z4 w1776595803
+Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z6 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 2
+Z7 dD:/Azmemary/Mux
+Z8 8D:/Azmemary/Mux/Mux.vhd
+Z9 FD:/Azmemary/Mux/Mux.vhd
+l0
+L5 1
+V_@V6cJEQ0Nj[gAEd`5@:R3
+!s100 ?1FdE`;Z6X=e<HMMmfJNE3
+Z10 OL;C;2020.4;71
+32
+Z11 !s110 1776596396
+!i10b 1
+Z12 !s108 1776596396.000000
+Z13 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/Mux/Mux.vhd|
+Z14 !s107 D:/Azmemary/Mux/Mux.vhd|
+!i113 0
+Z15 o-work work -2002 -explicit
+Z16 tExplicit 1 CvgOpt 0
+Abehavioral
+R5
+R6
+Z17 DEx4 work 7 mux4to1 0 22 _@V6cJEQ0Nj[gAEd`5@:R3
+!i122 2
+l14
+L13 11
+VB@6>gj6@JiO9nB=ZTP=hk1
+!s100 gPoKkz1DI0WM@m0Xz>A_52
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+R16
+Etb_mux4to1
+Z18 w1776595789
+R5
+R6
+!i122 3
+R7
+Z19 8D:/Azmemary/Mux/Muxtb.vhd
+Z20 FD:/Azmemary/Mux/Muxtb.vhd
+l0
+L5 1
+V4HPeEjX:PAlh>R8hIf`aS0
+!s100 24f5:_DllfOInKZI;9VE^3
+R10
+32
+R11
+!i10b 1
+R12
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/Mux/Muxtb.vhd|
+Z22 !s107 D:/Azmemary/Mux/Muxtb.vhd|
+!i113 0
+R15
+R16
+Abehavior
+R17
+R5
+R6
+DEx4 work 10 tb_mux4to1 0 22 4HPeEjX:PAlh>R8hIf`aS0
+!i122 3
+l14
+L8 37
+V^01^MC1`Lh]_9>9AB]9^L3
+!s100 H`:Njgk2@V^<Zl`=jS?zM2
+R10
+32
+R11
+!i10b 1
+R12
+R21
+R22
+!i113 0
+R15
+R16

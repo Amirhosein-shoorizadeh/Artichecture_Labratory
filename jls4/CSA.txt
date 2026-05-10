@@ -1,0 +1,114 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity csa is
+    Port ( A     : in  STD_LOGIC_VECTOR (3 downto 0);
+           B     : in  STD_LOGIC_VECTOR (3 downto 0);
+           Cin   : in  STD_LOGIC;
+           Sum   : out STD_LOGIC_VECTOR (3 downto 0);
+           Cout  : out STD_LOGIC);
+end csa;
+
+architecture Structural of csa is
+
+    component RippleCarryAdder
+        Port ( 
+           A     : in  STD_LOGIC_VECTOR (3 downto 0);
+           B     : in  STD_LOGIC_VECTOR (3 downto 0);
+           Cin   : in  STD_LOGIC;
+           Sum   : out STD_LOGIC_VECTOR (3 downto 0);
+           Cout  : out STD_LOGIC);
+    end component;
+
+    signal Sum0 : STD_LOGIC_VECTOR (3 downto 0);
+    signal Sum1 : STD_LOGIC_VECTOR (3 downto 0);
+    signal cout0 : STD_LOGIC;
+    signal cout1 : STD_LOGIC;
+begin
+    RA0: RippleCarryAdder port map (A, B, '0', Sum0, cout0);
+    RA1: RippleCarryAdder port map (A, B, '1', Sum1, cout1);
+    
+    CMB : process(Cin,Sum0,Sum1,cout0,cout1)
+    begin
+        if(Cin='0') then
+            Cout<=cout0;
+	    Sum<=Sum0;
+        else
+            Cout<=cout1;
+	    Sum<=Sum1;
+        end if;
+    end process;
+
+end Structural;
+==================================================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity csa_TB is
+end csa_TB;
+
+architecture Behavioral of csa_TB is
+
+
+    signal A     : STD_LOGIC_VECTOR (3 downto 0);
+    signal B     : STD_LOGIC_VECTOR (3 downto 0);
+    signal Cin   : STD_LOGIC;
+    signal Sum   : STD_LOGIC_VECTOR (3 downto 0);
+    signal Cout  : STD_LOGIC;
+
+
+    component csa
+        Port ( A     : in  STD_LOGIC_VECTOR (3 downto 0);
+               B     : in  STD_LOGIC_VECTOR (3 downto 0);
+               Cin   : in  STD_LOGIC;
+               Sum   : out STD_LOGIC_VECTOR (3 downto 0);
+               Cout  : out STD_LOGIC);
+    end component;
+
+begin
+
+
+    UUT: csa port map (
+        A    => A,
+        B    => B,
+        Cin  => Cin,
+        Sum  => Sum,
+        Cout => Cout
+    );
+
+
+    process
+    begin
+        --0+0
+        A <= "0000"; B <= "0000"; Cin <= '0';
+        wait for 10 ns;
+        --1+1
+        A <= "0001"; B <= "0001"; Cin <= '0';
+        wait for 10 ns;
+        --5+3
+        A <= "0101"; B <= "0011"; Cin <= '0';
+        wait for 10 ns;
+        --7+5
+        A <= "0111"; B <= "0101"; Cin <= '1';
+        wait for 10 ns;
+        --15+1
+        A <= "1111"; B <= "0001"; Cin <= '0';
+        wait for 10 ns;
+        --15+15
+        A <= "1111"; B <= "1111"; Cin <= '1';
+        wait for 10 ns;
+        --8+8
+        A <= "1000"; B <= "1000"; Cin <= '0';
+        wait for 10 ns;
+        --10+10
+        A <= "1010"; B <= "0101"; Cin <= '1';
+        wait for 10 ns;
+        wait;
+    end process;
+
+end Behavioral;
+===========================================================================
+به جای منتظر ماندن برای محاسبه نقلی، هر دو حالت ممکن را همزمان محاسبه می‌کنیم
+RA0: RippleCarryAdder port map (A, B, '0', Sum0, cout0);  ===>  Cin=0
+RA1: RippleCarryAdder port map (A, B, '1', Sum1, cout1);   ===>  Cin=1
+و در اخر با توجه ب کری قبلی  انتخاب میکنیم

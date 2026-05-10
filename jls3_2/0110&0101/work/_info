@@ -1,0 +1,102 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/modeltech64_2020.4/examples
+T_opt
+!s110 1777802742
+V>7YPeK[JM9jo@fG[F^Jig0
+04 20 10 work tb_sequence_detector behavioral 1
+=1-107c618fe682-69f71df6-2e0-1560
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2020.4;71
+Esequence_detector
+Z0 w1777801558
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 17
+Z3 dD:/Azmemary/jls3_2/0110&0101
+Z4 8D:/Azmemary/jls3_2/0110&0101/Finder.vhd
+Z5 FD:/Azmemary/jls3_2/0110&0101/Finder.vhd
+l0
+L4 1
+VIVRAcB;kWF0@N527GM@QR0
+!s100 zni?8ADe@9bX6M=icER3E2
+Z6 OL;C;2020.4;71
+32
+Z7 !s110 1777802370
+!i10b 1
+Z8 !s108 1777802370.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3_2/0110&0101/Finder.vhd|
+Z10 !s107 D:/Azmemary/jls3_2/0110&0101/Finder.vhd|
+!i113 0
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1 CvgOpt 0
+Abehavioral
+R1
+R2
+DEx4 work 17 sequence_detector 0 22 IVRAcB;kWF0@N527GM@QR0
+!i122 17
+l16
+L13 58
+Vk^<UTlD6988b0HAAKNDjg1
+!s100 0WJN^;PQ4l^7Zl^i14K6Z0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 0
+R11
+R12
+Etb_sequence_detector
+Z13 w1777802043
+R1
+R2
+!i122 16
+R3
+Z14 8D:/Azmemary/jls3_2/0110&0101/FinderTb.vhd
+Z15 FD:/Azmemary/jls3_2/0110&0101/FinderTb.vhd
+l0
+L4 1
+V7dRNXnbV?C5PG``W3PaAW3
+!s100 ZX<hlDB9[W40U6GOnFCN_3
+R6
+32
+R7
+!i10b 1
+R8
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3_2/0110&0101/FinderTb.vhd|
+Z17 !s107 D:/Azmemary/jls3_2/0110&0101/FinderTb.vhd|
+!i113 0
+R11
+R12
+Abehavioral
+R1
+R2
+DEx4 work 20 tb_sequence_detector 0 22 7dRNXnbV?C5PG``W3PaAW3
+!i122 16
+l28
+L8 81
+VIf4]egG_8_=>kI0nF>[d62
+!s100 Z=iD:9_iIF2zIlKGCS]n@0
+R6
+32
+R7
+!i10b 1
+R8
+R16
+R17
+!i113 0
+R11
+R12

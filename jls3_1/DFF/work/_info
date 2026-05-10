@@ -1,0 +1,103 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/modeltech64_2020.4/examples
+T_opt
+!s110 1777198911
+VzENUM4@W6]=FbPlUAII2M1
+04 5 8 work dfftb behavior 1
+=1-04ecd8c4ec49-69ede73e-3dc-4440
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2020.4;71
+Edff
+Z0 w1777198864
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 8
+Z3 dD:/Azmemary/jls3/DFF
+Z4 8D:/Azmemary/jls3/DFF/DFF.vhd
+Z5 FD:/Azmemary/jls3/DFF/DFF.vhd
+l0
+L4 1
+VdB=Gj;Z9_X<0l5<Q[N6Oh3
+!s100 VMY>:[agDP9oM8^26@fgI0
+Z6 OL;C;2020.4;71
+32
+Z7 !s110 1777198870
+!i10b 1
+Z8 !s108 1777198870.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3/DFF/DFF.vhd|
+Z10 !s107 D:/Azmemary/jls3/DFF/DFF.vhd|
+!i113 0
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1 CvgOpt 0
+Abehavioral
+R1
+R2
+Z13 DEx4 work 3 dff 0 22 dB=Gj;Z9_X<0l5<Q[N6Oh3
+!i122 8
+l14
+L13 11
+VGN3_>C54[klz=I[TKPdO<3
+!s100 K6Z3ZM9BS?9_3A;:TS[UN2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 0
+R11
+R12
+Edfftb
+Z14 w1777198596
+R1
+R2
+!i122 9
+R3
+Z15 8D:/Azmemary/jls3/DFF/DFFTb.vhd
+Z16 FD:/Azmemary/jls3/DFF/DFFTb.vhd
+l0
+L4 1
+VbNPQC7=22KcALfDZGAzHz0
+!s100 oJ?GBWZki>7PkiR[I=BW<3
+R6
+32
+R7
+!i10b 1
+R8
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3/DFF/DFFTb.vhd|
+Z18 !s107 D:/Azmemary/jls3/DFF/DFFTb.vhd|
+!i113 0
+R11
+R12
+Abehavior
+R13
+R1
+R2
+DEx4 work 5 dfftb 0 22 bNPQC7=22KcALfDZGAzHz0
+!i122 9
+l11
+L7 60
+VV_fVcd@S7`JCPK]Gm_g_j2
+!s100 _L_ciP9LOB9L4QRRCfIX30
+R6
+32
+R7
+!i10b 1
+R8
+R17
+R18
+!i113 0
+R11
+R12

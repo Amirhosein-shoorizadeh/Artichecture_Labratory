@@ -1,0 +1,113 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/modeltech64_2020.4/examples
+T_opt
+!s110 1776592832
+Vh^L?gX_6^YCgIhkLZjDd33
+Z1 04 15 8 work tb_decoder_2to4 behavior 1
+=1-04ecd8c4ec49-69e4a7bf-3d7-1438
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+R0
+T_opt1
+!s110 1776592962
+V_@?kR^GD=><gR>j9Q:7nb0
+R1
+=1-04ecd8c4ec49-69e4a842-5e-2278
+o-quiet -auto_acc_if_foreign -work work
+R2
+n@_opt1
+R3
+Edecoder_2to4
+Z4 w1776592753
+Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z6 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 2
+Z7 dD:/Azmemary/dedcoder
+Z8 8D:/Azmemary/dedcoder/decoder.vhd
+Z9 FD:/Azmemary/dedcoder/decoder.vhd
+l0
+L4 1
+VC6G@ZAFNT58;Yj7;`fCCz2
+!s100 a2bV98^fzd<RD46I7^IWI2
+Z10 OL;C;2020.4;71
+32
+Z11 !s110 1776592953
+!i10b 1
+Z12 !s108 1776592953.000000
+Z13 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/dedcoder/decoder.vhd|
+Z14 !s107 D:/Azmemary/dedcoder/decoder.vhd|
+!i113 0
+Z15 o-work work -2002 -explicit
+Z16 tExplicit 1 CvgOpt 0
+Agate_level
+R5
+R6
+Z17 DEx4 work 12 decoder_2to4 0 22 C6G@ZAFNT58;Yj7;`fCCz2
+!i122 2
+l15
+L11 17
+V_e2h:^QEC1d>K0cQzkneP3
+!s100 G67iF]_h3513TQdXGQHH>0
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+R16
+Etb_decoder_2to4
+Z18 w1776592943
+R5
+R6
+!i122 3
+R7
+Z19 8D:/Azmemary/dedcoder/decodertb.vhd
+Z20 FD:/Azmemary/dedcoder/decodertb.vhd
+l0
+L4 1
+VK8ZSmRcim7zgjc1S^Wch>3
+!s100 jdUFZ4JJPoeI[aZDPEZ_K1
+R10
+32
+R11
+!i10b 1
+R12
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/dedcoder/decodertb.vhd|
+Z22 !s107 D:/Azmemary/dedcoder/decodertb.vhd|
+!i113 0
+R15
+R16
+Abehavior
+R17
+R5
+R6
+DEx4 work 15 tb_decoder_2to4 0 22 K8ZSmRcim7zgjc1S^Wch>3
+!i122 3
+l12
+L7 33
+V3BX7Db4TnoXjaNC9?AJRn2
+!s100 YF@l_=H]7PR3=CMMYD5<n1
+R10
+32
+R11
+!i10b 1
+R12
+R21
+R22
+!i113 0
+R15
+R16

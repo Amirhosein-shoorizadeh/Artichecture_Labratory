@@ -1,0 +1,153 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity moore_1101_detector is
+port(
+	din : in std_logic ;
+	detected : out std_logic;
+	clk : in std_logic
+);
+end moore_1101_detector;
+architecture Behavioral of moore_1101_detector is
+	type state_t is (s0 , s1 , s2 , s3 , s4);
+	signal state : state_t := s0;
+	signal next_state : state_t := s0;
+begin
+	CMB : process(state , din)
+	begin
+	case state is
+		when s0=>
+			if(din = '1') then
+				next_state <= s1;
+			else
+				next_state <= s0;
+			end if;
+		when s1=>
+			if(din = '1') then
+				next_state <= s2;
+			else
+				next_state <= s0;
+			end if;
+		when s2=>
+			if(din = '1') then
+				next_state <= s2;
+			else
+				next_state <= s3;
+			end if;
+		when s3=>
+			if(din = '1') then
+				next_state <= s4;
+			else
+				next_state <= s0;
+			end if;
+		when s4=>
+			if(din = '1') then
+				next_state <= s2;
+			else
+				next_state <= s0;
+			end if;
+		when others=>
+			next_state <= s0;
+		end case;
+	end process;
+	REG : process(clk)
+	begin
+		if(clk'event and clk = '1') then
+			state <= next_state;
+		end if;
+	end process;
+	detected <= '0' when state = s0 else
+		'0' when state = s1 else
+		'0' when state = s2 else
+		'0' when state = s3 else
+		'1' when state = s4 ;
+end Behavioral;
+
+
+
+
+
+
+
+
+
+
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_1101_moore is
+
+end tb_1101_moore;
+
+architecture Behavioral of tb_1101_moore is
+
+    component moore_1101_detector
+        Port (
+            clk     : in  STD_LOGIC;
+            din     : in  STD_LOGIC;
+            detected : out STD_LOGIC
+        );
+    end component;
+
+
+    signal clk     : STD_LOGIC := '0';
+    signal din     : STD_LOGIC := '0';
+    signal detected : STD_LOGIC;
+
+
+    constant clk_period : time := 10 ns;
+
+begin
+
+    uut: moore_1101_detector
+        Port map (
+            clk     => clk,
+	    detected => detected,
+            din     => din
+        );
+
+    clk_process: process
+    begin
+        clk <= '0';
+        wait for clk_period / 2;
+        clk <= '1';
+        wait for clk_period / 2;
+    end process;
+
+
+    stimulus_process: process
+    begin
+
+        wait for 20 ns;
+
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '1'; wait for clk_period;  -- 0111
+
+
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;  -- 0101
+
+
+
+        din <= '0'; wait for clk_period;
+
+
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '1'; wait for clk_period;
+        din <= '0'; wait for clk_period;  -- 0110
+
+        din <= '1'; wait for clk_period;  
+        din <= '0'; wait for clk_period;
+        din <= '1'; wait for clk_period;  -- 0101
+
+
+        wait;
+    end process;
+end Behavioral;
+

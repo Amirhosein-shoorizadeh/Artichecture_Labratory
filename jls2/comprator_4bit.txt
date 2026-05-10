@@ -1,0 +1,95 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity comp4bit is
+    Port (
+        A : in  STD_LOGIC_VECTOR(3 downto 0);
+        B : in  STD_LOGIC_VECTOR(3 downto 0);
+        G,E,L : out STD_LOGIC
+    );
+end comp4bit;
+
+architecture Structural of comp4bit is
+
+component comp1bit
+    Port (
+        a,b,gt,eq,lt : in  STD_LOGIC;
+        G,E,L : out STD_LOGIC
+    );
+end component;
+
+signal G1,G2,G3 : STD_LOGIC;
+signal E1,E2,E3 : STD_LOGIC;
+signal L1,L2,L3 : STD_LOGIC;
+
+begin
+
+C3: comp1bit port map(A(0), B(0), '0', '1', '0', G1, E1, L1);
+
+C2: comp1bit port map(A(1), B(1), G1, E1, L1, G2, E2, L2);
+
+C1: comp1bit port map(A(2), B(2), G2, E2, L2, G3, E3, L3);
+
+C0: comp1bit port map(A(3), B(3), G3, E3, L3, G, E, L);
+
+end Structural;
+
+
+
+
+
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_comp4bit is
+end tb_comp4bit;
+
+architecture behavior of tb_comp4bit is
+    signal A,B : STD_LOGIC_VECTOR(3 downto 0);
+    signal G,E,L : std_logic;
+
+begin
+
+uut: entity work.comp4bit
+port map(
+A => A,
+B => B,
+G => G,
+E => E,
+L => L
+);
+
+process
+begin
+
+A <= "0101";
+B <= "1110";
+wait for 40 ns;
+
+A <= "1101";
+B <= "1101";
+wait for 40 ns;
+
+A <= "0101";
+B <= "1100";
+wait for 40 ns;
+
+A <= "1010";
+B <= "0101";
+wait for 40 ns;
+
+A <= "1000";
+B <= "1000";
+wait for 40 ns;
+
+A <= "0010";
+B <= "0001";
+wait for 40 ns;
+
+wait;
+
+end process;
+
+end behavior;

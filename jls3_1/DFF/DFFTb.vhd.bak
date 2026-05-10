@@ -1,0 +1,66 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity DFFTb is
+end DFFTb;
+
+architecture behavior of DFFTb is
+
+    signal clk,d,reset,q : std_logic;
+
+begin
+
+uut: entity work.dff
+port map(
+clk => clk,
+d => d,
+reset => reset,
+q=>q
+);
+
+process
+begin
+
+d <= '0';
+reset <= '0';
+clk <= '0';
+wait for 30 ns;
+
+d <= '0';
+wait for 10 ns;
+
+clk <= '1';
+wait for 40 ns;
+
+clk <= '0';
+wait for 40 ns;
+
+clk <= '1';
+wait for 30 ns;
+
+d <= '1';
+wait for 10 ns;
+
+clk <= '0';
+wait for 30 ns;
+
+d <= '1';
+wait for 10 ns;
+
+clk <= '1';
+wait for 40 ns;
+
+clk <= '0';
+wait for 20 ns;
+
+reset <= '1';
+wait for 20 ns;
+
+clk <= '1';
+wait for 40 ns;
+
+wait;
+
+end process;
+
+end behavior;

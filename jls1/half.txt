@@ -1,0 +1,60 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity half_adder is
+    port (
+        in1, in2 : in std_logic;
+        sum, carry : out std_logic
+    );
+end entity;
+
+architecture gate of half_adder is
+begin
+    sum   <= in1 xor in2;
+    carry <= in1 and in2;
+end architecture;
+
+
+
+
+
+
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity tb_half_adder is
+end entity;
+
+architecture tb of tb_half_adder is
+
+    component half_adder is
+        port (
+            in1, in2 : in std_logic;
+            sum, carry : out std_logic
+        );
+    end component;
+
+    signal t_in1, t_in2 : std_logic;
+    signal t_sum, t_carry : std_logic;
+
+begin
+
+    uut: half_adder
+        port map (
+            in1 => t_in1,
+            in2 => t_in2,
+            sum => t_sum,
+            carry => t_carry
+        );
+
+    stim_proc : process
+    begin
+        t_in1 <= '0'; t_in2 <= '0'; wait for 20 ns;
+        t_in1 <= '0'; t_in2 <= '1'; wait for 20 ns;
+        t_in1 <= '1'; t_in2 <= '0'; wait for 20 ns;
+        t_in1 <= '1'; t_in2 <= '1'; wait for 20 ns;
+        wait;
+    end process;
+
+end architecture;

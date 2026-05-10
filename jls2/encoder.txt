@@ -1,0 +1,76 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity encoder4to2 is
+    port (
+        d0,d1,d2,d3 : in std_logic;
+        o0,o1 : out std_logic
+    );
+end entity encoder4to2;
+
+architecture gatelevel of encoder4to2 is
+begin
+    o0 <= d1 or d3;
+    o1 <= d2 or d3;
+end architecture gatelevel;
+
+
+
+
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_encoder_4to2 is
+end tb_encoder_4to2;
+
+architecture behavior of tb_encoder_4to2 is
+
+    signal d0,d1,d2,d3 : std_logic;
+    signal o0,o1 : std_logic;
+
+begin
+
+uut: entity work.encoder4to2
+port map(
+d0 => d0,
+d1 => d1,
+d2 => d2,
+d3 => d3,
+o0 => o0,
+o1 => o1
+);
+
+process
+begin
+
+d0 <= '1';
+d1 <= '0';
+d2 <= '0';
+d3 <= '0';
+wait for 40 ns;
+
+d0 <= '0';
+d1 <= '1';
+d2 <= '0';
+d3 <= '0';
+wait for 40 ns;
+
+d0 <= '0';
+d1 <= '0';
+d2 <= '1';
+d3 <= '0';
+wait for 40 ns;
+
+d0 <= '0';
+d1 <= '0';
+d2 <= '0';
+d3 <= '1';
+wait for 40 ns;
+
+wait;
+
+end process;
+
+end behavior;

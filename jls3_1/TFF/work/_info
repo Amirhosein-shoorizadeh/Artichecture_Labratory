@@ -1,0 +1,206 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Azmemary/jls3/DFF
+T_opt
+!s110 1777201251
+V8fFDz1gc6HiNiRJOUEKDz1
+04 5 8 work tfftb behavior 1
+=1-04ecd8c4ec49-69edf063-130-5c1c
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+R0
+T_opt1
+!s110 1777203191
+V?HABzbfWB_4F>L3MC`23l2
+04 20 2 work ripplecounter_tff_tb tb 1
+=1-04ecd8c4ec49-69edf7f6-382-3560
+R1
+R2
+n@_opt1
+R3
+T_opt2
+!s110 1777202792
+Vm1Bf5h`M_EFDd;IMM]V^b2
+04 3 10 work tff behavioral 1
+=1-04ecd8c4ec49-69edf668-174-130
+R1
+R2
+n@_opt2
+R3
+R0
+Eripplecounter_tff
+Z4 w1777203144
+Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z6 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 48
+Z7 dD:/Azmemary/jls3/TFF
+Z8 8D:/Azmemary/jls3/TFF/RippleCounter.vhd
+Z9 FD:/Azmemary/jls3/TFF/RippleCounter.vhd
+l0
+L4 1
+V0i9_NRO4LSKXnK9W5n4X_1
+!s100 7YdQ]aieY7AJ^f@Li@bED2
+Z10 OL;C;2020.4;71
+32
+Z11 !s110 1777203161
+!i10b 1
+Z12 !s108 1777203161.000000
+Z13 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3/TFF/RippleCounter.vhd|
+Z14 !s107 D:/Azmemary/jls3/TFF/RippleCounter.vhd|
+!i113 0
+Z15 o-work work -2002 -explicit
+Z16 tExplicit 1 CvgOpt 0
+Abehavioral
+Z17 DEx4 work 3 tff 0 22 o9k@o[fKFaUSCBz0c^_Gc0
+R5
+R6
+DEx4 work 17 ripplecounter_tff 0 22 0i9_NRO4LSKXnK9W5n4X_1
+!i122 48
+l17
+L12 47
+Vin[5:EmOJ_XVf0zfCPOom1
+!s100 WzVT[c``6fg`VW78Xb:kW3
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 0
+R15
+R16
+Eripplecounter_tff_tb
+Z18 w1777201992
+R5
+R6
+!i122 49
+R7
+Z19 8D:/Azmemary/jls3/TFF/RippleCounterTb.vhd
+Z20 FD:/Azmemary/jls3/TFF/RippleCounterTb.vhd
+l0
+L4 1
+VVWUm@?KQ?b6Z5g`Cn]mQ:0
+!s100 Uj2WCFfePVJCh@1PGMdkz0
+R10
+32
+R11
+!i10b 1
+R12
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3/TFF/RippleCounterTb.vhd|
+Z22 !s107 D:/Azmemary/jls3/TFF/RippleCounterTb.vhd|
+!i113 0
+R15
+R16
+Atb
+R5
+R6
+DEx4 work 20 ripplecounter_tff_tb 0 22 VWUm@?KQ?b6Z5g`Cn]mQ:0
+!i122 49
+l23
+L7 58
+Vd3Gf06oS5eB5JhHUREIZU1
+!s100 L]XCE_J?RHdd];o4ZBaTn3
+R10
+32
+R11
+!i10b 1
+R12
+R21
+R22
+!i113 0
+R15
+R16
+Etff
+Z23 w1777200536
+R5
+R6
+!i122 46
+R7
+Z24 8D:/Azmemary/jls3/TFF/TFF.vhd
+Z25 FD:/Azmemary/jls3/TFF/TFF.vhd
+l0
+L4 1
+Vo9k@o[fKFaUSCBz0c^_Gc0
+!s100 =Uk?kD6`_U]k[in]XQGF41
+R10
+32
+R11
+!i10b 1
+Z26 !s108 1777203160.000000
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3/TFF/TFF.vhd|
+Z28 !s107 D:/Azmemary/jls3/TFF/TFF.vhd|
+!i113 0
+R15
+R16
+Abehavioral
+R5
+R6
+R17
+!i122 46
+l15
+L13 15
+VQA5FA=?iJb[0Wa:0JOU4Y2
+!s100 ]NJ<J`cPHB6C]^VP6g;Q<3
+R10
+32
+R11
+!i10b 1
+R26
+R27
+R28
+!i113 0
+R15
+R16
+Etfftb
+Z29 w1777201234
+R5
+R6
+!i122 47
+R7
+Z30 8D:/Azmemary/jls3/TFF/TFFTb.vhd
+Z31 FD:/Azmemary/jls3/TFF/TFFTb.vhd
+l0
+L4 1
+VU:iH`4>SOa:fd??kdn9Vc2
+!s100 Q3J:33URNhi;L_gAFL@JV1
+R10
+32
+R11
+!i10b 1
+R12
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Azmemary/jls3/TFF/TFFTb.vhd|
+Z33 !s107 D:/Azmemary/jls3/TFF/TFFTb.vhd|
+!i113 0
+R15
+R16
+Abehavior
+R17
+R5
+R6
+DEx4 work 5 tfftb 0 22 U:iH`4>SOa:fd??kdn9Vc2
+!i122 47
+l16
+L7 57
+V8_BP[I@5eXSgV]k:`4RiH0
+!s100 5HnSb8QlEG14YmOz9[Qo52
+R10
+32
+R11
+!i10b 1
+R12
+R32
+R33
+!i113 0
+R15
+R16

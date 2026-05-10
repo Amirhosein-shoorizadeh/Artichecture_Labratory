@@ -1,0 +1,58 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity RippleCounter_tff is
+    Port (
+        clk   : in  STD_LOGIC;
+        reset : in  STD_LOGIC;
+        q     : out STD_LOGIC_VECTOR(3 downto 0)
+    );
+end RippleCounter_tff;
+
+architecture Behavioral of RippleCounter_tff is
+
+    signal tff_q  : STD_LOGIC_VECTOR(3 downto 0);
+    signal nq     : STD_LOGIC_VECTOR(3 downto 0);
+
+begin
+
+    nq(0) <= not tff_q(0);
+    nq(1) <= not tff_q(1);
+    nq(2) <= not tff_q(2);
+    nq(3) <= not tff_q(3);
+    
+    tff0: entity work.tff
+        port map (
+            clk   => clk,
+            reset => reset,
+            t     => '1',
+            q     => tff_q(0)
+        );
+
+    tff1: entity work.tff
+        port map (
+            clk   => nq(0),
+            reset => reset,
+            t     => '1',
+            q     => tff_q(1)
+        );
+
+    tff2: entity work.tff
+        port map (
+            clk   => nq(1),
+            reset => reset,
+            t     => '1',
+            q     => tff_q(2)
+        );
+
+    tff3: entity work.tff
+        port map (
+            clk   => nq(2),
+            reset => reset,
+            t     => '1',
+            q     => tff_q(3)
+        );
+
+    q <= tff_q;
+
+end Behavioral;

@@ -1,0 +1,82 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity comp1bit is
+    port (
+        a,b,gt,eq,lt : in std_logic;
+        G,E,L : out std_logic
+    );
+end entity comp1bit;
+
+architecture gatelevel of comp1bit is
+begin
+    G <= (a and (not b)) or ((a xnor b) and gt);
+    L <= ((not a) and b) or ((a xnor b) and lt);
+    E <= eq and (a xnor b);
+
+end architecture gatelevel;
+
+
+
+
+
+
+
+
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_comp1bit is
+end tb_comp1bit;
+
+architecture behavior of tb_comp1bit is
+
+    signal a,b,gt,eq,lt : std_logic;
+    signal G,E,L : std_logic;
+
+begin
+
+uut: entity work.comp1bit
+port map(
+a => a,
+b => b,
+lt => lt,
+gt => gt,
+eq => eq,
+G => G,
+E => E,
+L => L
+);
+
+process
+begin
+
+a <= '0';
+b <= '0';
+lt <= '1';
+eq <= '0';
+gt <= '0';
+wait for 40 ns;
+
+a <= '1';
+b <= '0';
+wait for 40 ns;
+
+a <= '0';
+b <= '1';
+wait for 40 ns;
+
+a <= '1';
+b <= '1';
+lt <= '0';
+eq <= '1';
+gt <= '0';
+wait for 40 ns;
+
+wait;
+
+end process;
+
+end behavior;
