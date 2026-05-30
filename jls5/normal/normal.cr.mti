@@ -1,0 +1,26 @@
+D:/Artichecture_Labratory/jls5/normal/Normal.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none D:/Artichecture_Labratory/jls5/normal/Normal.vhd
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Multiplier_4x4
+-- Compiling architecture Structural of Multiplier_4x4
+
+} {} {}} D:/Artichecture_Labratory/jls5/normal/Normal_TB.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none D:/Artichecture_Labratory/jls5/normal/Normal_TB.vhd
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Multiplier_4x4_tb
+-- Compiling architecture Behavioral of Multiplier_4x4_tb
+
+} {} {}} D:/Artichecture_Labratory/jls5/normal/FA.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none D:/Artichecture_Labratory/jls5/normal/FA.vhd
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity FullAdder
+-- Compiling architecture Behavioral of FullAdder
+
+} {} {}}

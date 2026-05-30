@@ -1,0 +1,123 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity csa_multiplier is
+Port ( 
+	X : in STD_LOGIC_VECTOR(3 downto 0);
+	Y : in STD_LOGIC_VECTOR(3 downto 0);
+	P : out STD_LOGIC_VECTOR(7 downto 0)
+);
+end csa_multiplier;
+
+architecture Structural of csa_multiplier is
+component FullAdder
+Port ( 
+	A : in STD_LOGIC;
+	B : in STD_LOGIC;
+	Cin : in STD_LOGIC;
+	Sum : out STD_LOGIC;
+	Cout : out STD_LOGIC
+);
+end component;
+
+signal S : STD_LOGIC_VECTOR(5 downto 0);
+signal C : STD_LOGIC_VECTOR(10 downto 0);
+signal pp0, pp1, pp2, pp3 : STD_LOGIC_VECTOR (3 downto 0);
+begin
+    pp0(0) <= X(0) AND Y(0);
+    pp0(1) <= X(1) AND Y(0);
+    pp0(2) <= X(2) AND Y(0);
+    pp0(3) <= X(3) AND Y(0);
+
+    pp1(0) <= X(0) AND Y(1);
+    pp1(1) <= X(1) AND Y(1);
+    pp1(2) <= X(2) AND Y(1);
+    pp1(3) <= X(3) AND Y(1);
+
+    pp2(0) <= X(0) AND Y(2);
+    pp2(1) <= X(1) AND Y(2);
+    pp2(2) <= X(2) AND Y(2);
+    pp2(3) <= X(3) AND Y(2);
+
+    pp3(0) <= X(0) AND Y(3);
+    pp3(1) <= X(1) AND Y(3);
+    pp3(2) <= X(2) AND Y(3);
+    pp3(3) <= X(3) AND Y(3);
+    
+    P(0) <= pp0(0);
+
+    FA0: FullAdder port map (pp1(0),pp0(1),'0', P(1), C(0));
+    FA1: FullAdder port map (pp2(0),pp1(1),'0', S(0), C(1));
+    FA2: FullAdder port map (pp3(0),pp2(1),'0', S(1), C(2));
+    
+    FA3: FullAdder port map (pp0(2),C(0),S(0), P(2), C(3));
+    FA4: FullAdder port map (pp1(2),C(1),S(1), S(2), C(4));
+    FA5: FullAdder port map (pp2(2),C(2),pp3(1), S(3), C(5));
+    
+    FA6: FullAdder port map (pp0(3),C(3),S(2) , P(3), C(6));
+    FA7: FullAdder port map (pp1(3),C(4),S(3) , S(4), C(7));
+    FA8: FullAdder port map (pp2(3),C(5),pp3(2), S(5), C(8));
+    
+    FA9 : FullAdder port map (C(6),S(4),'0', P(4), C(9));
+    FA10: FullAdder port map (C(7),S(5),C(9), P(5), C(10));
+    FA11: FullAdder port map (C(8),pp3(3),C(10), P(6), P(7));
+
+end Structural;
+
+================================================
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity csa_multiplier_tb is
+end csa_multiplier_tb;
+
+architecture Behavioral of csa_multiplier_tb is
+
+    component csa_multiplier is
+        Port ( X : in  STD_LOGIC_VECTOR (3 downto 0);
+               Y : in  STD_LOGIC_VECTOR (3 downto 0);
+               P : out STD_LOGIC_VECTOR (7 downto 0)
+             );
+    end component;
+
+    signal X_tb : STD_LOGIC_VECTOR (3 downto 0);
+    signal Y_tb : STD_LOGIC_VECTOR (3 downto 0);
+    signal P_tb : STD_LOGIC_VECTOR (7 downto 0);
+
+begin
+
+    UUT: csa_multiplier port map (X => X_tb, Y => Y_tb, P => P_tb);
+
+    process
+    begin
+        -- 15= 3*5
+        X_tb <= "0011";  -- 3
+        Y_tb <= "0101";  -- 5
+        wait for 10 ns;
+        
+        -- 14 = 2*7
+        X_tb <= "0111";  -- 7
+        Y_tb <= "0010";  -- 2
+        wait for 10 ns;
+        
+        -- 15 * 15 = 225 = 11110001
+        X_tb <= "1111";  -- 15
+        Y_tb <= "1111";  -- 15
+        wait for 10 ns;
+        
+        --  0 * 8 = 0
+        X_tb <= "0000";  -- 0
+        Y_tb <= "1000";  -- 8
+        wait for 10 ns;
+        
+        --  10 * 10 = 100
+        X_tb <= "1010";  -- 10
+        Y_tb <= "1010";  -- 10
+        wait for 10 ns;
+        
+        wait;
+    end process;
+
+end Behavioral;

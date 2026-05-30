@@ -1,0 +1,154 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Multiplier_4x4 is
+    Port ( X : in  STD_LOGIC_VECTOR (3 downto 0);  
+           Y : in  STD_LOGIC_VECTOR (3 downto 0); 
+           P : out STD_LOGIC_VECTOR (7 downto 0)  
+         );
+end Multiplier_4x4;
+
+architecture Structural of Multiplier_4x4 is
+
+    component FullAdder is
+        Port ( A    : in  STD_LOGIC;
+               B    : in  STD_LOGIC;
+               Cin  : in  STD_LOGIC;
+               Sum  : out STD_LOGIC;
+               Cout : out STD_LOGIC
+             );
+    end component;
+
+    
+    signal pp0, pp1, pp2, pp3 : STD_LOGIC_VECTOR (3 downto 0);
+    
+   
+    signal S0, S1, S2, S3 : STD_LOGIC_VECTOR (3 downto 0);
+    signal C0, C1, C2, C3 : STD_LOGIC_VECTOR (3 downto 0);
+    
+ 
+    signal carry_row0, carry_row1, carry_row2 : STD_LOGIC;
+
+begin
+    --patrial produc ha
+    pp0(0) <= X(0) AND Y(0);
+    pp0(1) <= X(1) AND Y(0);
+    pp0(2) <= X(2) AND Y(0);
+    pp0(3) <= X(3) AND Y(0);
+    
+    pp1(0) <= X(0) AND Y(1);
+    pp1(1) <= X(1) AND Y(1);
+    pp1(2) <= X(2) AND Y(1);
+    pp1(3) <= X(3) AND Y(1);
+    
+    pp2(0) <= X(0) AND Y(2);
+    pp2(1) <= X(1) AND Y(2);
+    pp2(2) <= X(2) AND Y(2);
+    pp2(3) <= X(3) AND Y(2);
+    
+    pp3(0) <= X(0) AND Y(3);
+    pp3(1) <= X(1) AND Y(3);
+    pp3(2) <= X(2) AND Y(3);
+    pp3(3) <= X(3) AND Y(3);
+
+    -- khoriji aval
+    P(0) <= pp0(0);
+    --radif aval
+    FA00: FullAdder port map (A => pp0(1), B => pp1(0), Cin => '0',        Sum => S0(0), Cout => C0(0));
+    FA01: FullAdder port map (A => pp0(2), B => pp1(1), Cin => C0(0),     Sum => S0(1), Cout => C0(1));
+    FA02: FullAdder port map (A => pp0(3), B => pp1(2), Cin => C0(1),     Sum => S0(2), Cout => C0(2));
+    FA03: FullAdder port map (A => '0',    B => pp1(3), Cin => C0(2),     Sum => S0(3), Cout => carry_row0);
+    
+    P(1) <= S0(0);
+    
+    --radif dovom
+    FA10: FullAdder port map (A => S0(1),  B => pp2(0), Cin => '0',        Sum => S1(0), Cout => C1(0));
+    FA11: FullAdder port map (A => S0(2),  B => pp2(1), Cin => C1(0),     Sum => S1(1), Cout => C1(1));
+    FA12: FullAdder port map (A => S0(3),  B => pp2(2), Cin => C1(1),     Sum => S1(2), Cout => C1(2));
+    FA13: FullAdder port map (A => carry_row0, B => pp2(3), Cin => C1(2), Sum => S1(3), Cout => carry_row1);
+    
+   
+    P(2) <= S1(0);
+    
+    --radif sevom
+    FA20: FullAdder port map (A => S1(1),  B => pp3(0), Cin => '0',        Sum => S2(0), Cout => C2(0));
+    FA21: FullAdder port map (A => S1(2),  B => pp3(1), Cin => C2(0),     Sum => S2(1), Cout => C2(1));
+    FA22: FullAdder port map (A => S1(3),  B => pp3(2), Cin => C2(1),     Sum => S2(2), Cout => C2(2));
+    FA23: FullAdder port map (A => carry_row1, B => pp3(3), Cin => C2(2), Sum => S2(3), Cout => carry_row2);
+    
+
+    P(3) <= S2(0);
+    
+    --radif 4
+    FA30: FullAdder port map (A => S2(1),  B => '0', Cin => '0',        Sum => S3(0), Cout => C3(0));
+    FA31: FullAdder port map (A => S2(2),  B => '0', Cin => C3(0),     Sum => S3(1), Cout => C3(1));
+    FA32: FullAdder port map (A => S2(3),  B => '0', Cin => C3(1),     Sum => S3(2), Cout => C3(2));
+    FA33: FullAdder port map (A => carry_row2, B => '0', Cin => C3(2), Sum => S3(3), Cout => C3(3));
+    
+   
+    P(4) <= S3(0);
+    P(5) <= S3(1);
+    P(6) <= S3(2);
+    P(7) <= S3(3);
+
+end Structural;
+
+
+=============================================================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity Multiplier_4x4_tb is
+end Multiplier_4x4_tb;
+
+architecture Behavioral of Multiplier_4x4_tb is
+
+    component Multiplier_4x4 is
+        Port ( X : in  STD_LOGIC_VECTOR (3 downto 0);
+               Y : in  STD_LOGIC_VECTOR (3 downto 0);
+               P : out STD_LOGIC_VECTOR (7 downto 0)
+             );
+    end component;
+
+    signal X_tb : STD_LOGIC_VECTOR (3 downto 0);
+    signal Y_tb : STD_LOGIC_VECTOR (3 downto 0);
+    signal P_tb : STD_LOGIC_VECTOR (7 downto 0);
+
+begin
+
+    UUT: Multiplier_4x4 port map (X => X_tb, Y => Y_tb, P => P_tb);
+
+    process
+    begin
+        -- 15= 3*5
+        X_tb <= "0011";  -- 3
+        Y_tb <= "0101";  -- 5
+        wait for 10 ns;
+        
+        -- 14 = 2*7
+        X_tb <= "0111";  -- 7
+        Y_tb <= "0010";  -- 2
+        wait for 10 ns;
+        
+        -- 15 * 15 = 225 = 11110001
+        X_tb <= "1111";  -- 15
+        Y_tb <= "1111";  -- 15
+        wait for 10 ns;
+        
+        --  0 * 8 = 0
+        X_tb <= "0000";  -- 0
+        Y_tb <= "1000";  -- 8
+        wait for 10 ns;
+        
+        --  10 * 10 = 100
+        X_tb <= "1010";  -- 10
+        Y_tb <= "1010";  -- 10
+        wait for 10 ns;
+        
+        wait;
+    end process;
+
+end Behavioral;
+
+==========================================================

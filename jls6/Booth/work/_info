@@ -1,0 +1,197 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/Artichecture_Labratory/jls5/normal
+T_opt
+!s110 1779618263
+VXUV9Y^9l5z?in^Xm]KW^d1
+04 8 3 work tb_booth sim 1
+=1-107c618fe682-6a12d1d7-1e9-4fb0
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2020.4;71
+Ebooth_multiplier_8bit
+Z0 w1779617601
+Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 6
+Z4 dD:/Artichecture_Labratory/jls6/Booth
+Z5 8D:\Artichecture_Labratory\jls6\Booth\booth.vhd
+Z6 FD:\Artichecture_Labratory\jls6\Booth\booth.vhd
+l0
+L5 1
+VA7Uc?I<S1_g;5_ZSTNaDa2
+!s100 fij3KS1BZihRzl=zSFKiU1
+Z7 OL;C;2020.4;71
+32
+Z8 !s110 1779618204
+!i10b 1
+Z9 !s108 1779618204.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls6\Booth\booth.vhd|
+Z11 !s107 D:\Artichecture_Labratory\jls6\Booth\booth.vhd|
+!i113 0
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Abehavioral
+R1
+R2
+R3
+Z14 DEx4 work 21 booth_multiplier_8bit 0 22 A7Uc?I<S1_g;5_ZSTNaDa2
+!i122 6
+l26
+L17 76
+V4PjKfnG_?eEXCZF_hk<Jd2
+!s100 8=82XUEMN?XE:ozGccLk@2
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 0
+R12
+R13
+Ebooth_multiplier_simple
+w1779616898
+R1
+R2
+R3
+!i122 0
+R4
+R5
+R6
+l0
+L5 1
+V4jWVV9jl2PV=SkB[4Jn]D0
+!s100 UVcL4@Xlog?OVL;[XG;_20
+R7
+32
+!s110 1779616916
+!i10b 1
+Z15 !s108 1779616916.000000
+R10
+R11
+!i113 0
+R12
+R13
+Etb_booth
+Z16 w1779618049
+R1
+R2
+R3
+!i122 7
+R4
+Z17 8D:\Artichecture_Labratory\jls6\Booth\Booth_tb.vhd
+Z18 FD:\Artichecture_Labratory\jls6\Booth\Booth_tb.vhd
+l0
+L5 1
+V4a@meBZD:aDcTmbeHdeiZ1
+!s100 nz7CSzj9:ajRh;U:1>U9]2
+R7
+32
+R8
+!i10b 1
+R9
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls6\Booth\Booth_tb.vhd|
+Z20 !s107 D:\Artichecture_Labratory\jls6\Booth\Booth_tb.vhd|
+!i113 0
+R12
+R13
+Asim
+R14
+R1
+R2
+R3
+DEx4 work 8 tb_booth 0 22 4a@meBZD:aDcTmbeHdeiZ1
+!i122 7
+l16
+L8 76
+VKilAWRG[@5ShHJeML[n]42
+!s100 W:6f32[FmWz^>=OCHfE6`1
+R7
+32
+R8
+!i10b 1
+R9
+R19
+R20
+!i113 0
+R12
+R13
+Etb_booth_multiplier
+w1779617613
+R1
+R2
+R3
+!i122 3
+R4
+R17
+R18
+l0
+L5 1
+VcflG>DGf>SeB][T=aC;nk3
+!s100 RQ34a^UUH0z<J^c9QDlnd2
+R7
+32
+!s110 1779617716
+!i10b 1
+!s108 1779617716.000000
+R19
+R20
+!i113 0
+R12
+R13
+Etb_booth_simple
+Z21 w1779616913
+R1
+R2
+R3
+!i122 1
+R4
+R17
+R18
+l0
+L6 1
+V3XNKFe0KzE0HAYG`<E_<j3
+!s100 <7hQmQKadVDgiUOS`z1Xl3
+R7
+32
+Z22 !s110 1779616917
+!i10b 1
+R15
+R19
+R20
+!i113 0
+R12
+R13
+Asim
+DEx4 work 23 booth_multiplier_simple 0 22 4jWVV9jl2PV=SkB[4Jn]D0
+R1
+R2
+R3
+DEx4 work 15 tb_booth_simple 0 22 3XNKFe0KzE0HAYG`<E_<j3
+!i122 1
+l12
+L9 36
+VnUCmTmEP:97o:HeKbE4_P0
+!s100 B:_gG9P`2^m]>FJbYWZ8Q3
+R7
+32
+R22
+!i10b 1
+R15
+R19
+R20
+!i113 0
+R12
+R13

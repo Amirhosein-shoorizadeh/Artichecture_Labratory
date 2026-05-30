@@ -1,0 +1,290 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/modeltech64_2020.4/examples
+T_opt
+!s110 1779455919
+Vkk==g6`h@Wm43__SP^Jl41
+04 21 10 work multiplier_4x4_cla_tb behavioral 1
+=1-107c618fe682-6a1057ae-263-25b8
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+T_opt1
+!s110 1779013402
+VEd[HOA3;hIW1h?X8ETdeO0
+Z4 04 17 10 work multiplier_4x4_tb behavioral 1
+=1-04ecd8c4ec49-6a09971a-f9-42ac
+o-quiet -auto_acc_if_foreign -work work
+R2
+n@_opt1
+R3
+R0
+T_opt2
+!s110 1779014415
+VhI1hcZXXIoX12;RC6AWRG3
+R4
+=1-04ecd8c4ec49-6a099b0e-2ff-3ec0
+R1
+R2
+n@_opt2
+R3
+R0
+Ecla_4bit
+Z5 w1779013727
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 14
+Z8 dD:/Artichecture_Labratory/jls5/normal
+Z9 8D:/Artichecture_Labratory/jls5/normal/CLA.vhd
+Z10 FD:/Artichecture_Labratory/jls5/normal/CLA.vhd
+l0
+L4 1
+V2L[PF`>RWnU8RWLhY3i]n1
+!s100 S9HKaE7jm`CZT[44oDBMK3
+Z11 OL;C;2020.4;71
+32
+Z12 !s110 1779455901
+!i10b 1
+Z13 !s108 1779455901.000000
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls5/normal/CLA.vhd|
+Z15 !s107 D:/Artichecture_Labratory/jls5/normal/CLA.vhd|
+!i113 0
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1 CvgOpt 0
+Abehavioral
+R6
+R7
+DEx4 work 8 cla_4bit 0 22 2L[PF`>RWnU8RWLhY3i]n1
+!i122 14
+l15
+L12 33
+Vod@VKbm6E>3P5Ah2hm=M82
+!s100 Fi>g9`WHYVTzbk0@ofIF20
+R11
+32
+R12
+!i10b 1
+R13
+R14
+R15
+!i113 0
+R16
+R17
+Efulladder
+Z18 w1779013386
+R6
+R7
+!i122 7
+R8
+Z19 8D:/Artichecture_Labratory/jls5/normal/FA.vhd
+Z20 FD:/Artichecture_Labratory/jls5/normal/FA.vhd
+l0
+L4 1
+Vc]U_3<FG:I1d<3<XnSLJG3
+!s100 XI?T^aZAG72E6YKWXV_;[3
+R11
+32
+Z21 !s110 1779013389
+!i10b 1
+Z22 !s108 1779013389.000000
+Z23 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls5/normal/FA.vhd|
+Z24 !s107 D:/Artichecture_Labratory/jls5/normal/FA.vhd|
+!i113 0
+R16
+R17
+Abehavioral
+R6
+R7
+DEx4 work 9 fulladder 0 22 c]U_3<FG:I1d<3<XnSLJG3
+!i122 7
+l13
+L12 5
+V@SzJ4@OzLjSofdk1iB1YT3
+!s100 H=beE6QWRHCe2Kg^UdW?V1
+R11
+32
+R21
+!i10b 1
+R22
+R23
+R24
+!i113 0
+R16
+R17
+Emultiplier_4x4
+Z25 w1779012136
+R6
+R7
+!i122 6
+R8
+Z26 8D:/Artichecture_Labratory/jls5/normal/Normal.vhd
+Z27 FD:/Artichecture_Labratory/jls5/normal/Normal.vhd
+l0
+L4 1
+VX;d9I[fBSLo`@3gJ=AYob0
+!s100 @ej?<3[fNA=j17ITnEmdj0
+R11
+32
+R21
+!i10b 1
+R22
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls5/normal/Normal.vhd|
+Z29 !s107 D:/Artichecture_Labratory/jls5/normal/Normal.vhd|
+!i113 0
+R16
+R17
+Astructural
+R6
+R7
+DEx4 work 14 multiplier_4x4 0 22 X;d9I[fBSLo`@3gJ=AYob0
+!i122 6
+l32
+L11 84
+V3Cd0@<igDHa0E7l6D<1Y[3
+!s100 gLzU2e1UUjOFgQ9gN`5XI3
+R11
+32
+R21
+!i10b 1
+R22
+R28
+R29
+!i113 0
+R16
+R17
+Emultiplier_4x4_cla
+Z30 w1779014956
+R6
+R7
+!i122 15
+R8
+Z31 8D:/Artichecture_Labratory/jls5/normal/Array.vhd
+Z32 FD:/Artichecture_Labratory/jls5/normal/Array.vhd
+l0
+L4 1
+Vd_D]RViYIT@9BCfNZ4Ql63
+!s100 9@T70n1T_AC4VS9=^9T<`1
+R11
+32
+Z33 !s110 1779455902
+!i10b 1
+Z34 !s108 1779455902.000000
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls5/normal/Array.vhd|
+Z36 !s107 D:/Artichecture_Labratory/jls5/normal/Array.vhd|
+!i113 0
+R16
+R17
+Astructural
+R6
+R7
+DEx4 work 18 multiplier_4x4_cla 0 22 d_D]RViYIT@9BCfNZ4Ql63
+!i122 15
+l33
+L11 107
+V4b6X4PQ4XSF@3aOzB>`kV3
+!s100 D=;WZ>V7U>=0Q1GBB0i5V3
+R11
+32
+R33
+!i10b 1
+R34
+R35
+R36
+!i113 0
+R16
+R17
+Emultiplier_4x4_cla_tb
+Z37 w1779015292
+Z38 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R6
+R7
+!i122 16
+R8
+Z39 8D:/Artichecture_Labratory/jls5/normal/Array_TB.vhd
+Z40 FD:/Artichecture_Labratory/jls5/normal/Array_TB.vhd
+l0
+L5 1
+V:a>dMlBFM::B=2ToEO0_S0
+!s100 >cM:0L4Jig1RAzcGLZ84C3
+R11
+32
+R33
+!i10b 1
+R34
+Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls5/normal/Array_TB.vhd|
+Z42 !s107 D:/Artichecture_Labratory/jls5/normal/Array_TB.vhd|
+!i113 0
+R16
+R17
+Abehavioral
+R38
+R6
+R7
+DEx4 work 21 multiplier_4x4_cla_tb 0 22 :a>dMlBFM::B=2ToEO0_S0
+!i122 16
+l21
+L8 44
+VklEBJFVZAWG3_J9LVj4TD3
+!s100 lhC3MIN6ZO?JZ=;lzLI]<2
+R11
+32
+R33
+!i10b 1
+R34
+R41
+R42
+!i113 0
+R16
+R17
+Emultiplier_4x4_tb
+Z43 w1779012394
+R38
+R6
+R7
+!i122 5
+R8
+Z44 8D:/Artichecture_Labratory/jls5/normal/Normal_TB.vhd
+Z45 FD:/Artichecture_Labratory/jls5/normal/Normal_TB.vhd
+l0
+L5 1
+V6jnnGVCdi7@@gjoP8]@NL2
+!s100 :6zdoadPk@[g:aV1GOP8Q1
+R11
+32
+R21
+!i10b 1
+R22
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls5/normal/Normal_TB.vhd|
+Z47 !s107 D:/Artichecture_Labratory/jls5/normal/Normal_TB.vhd|
+!i113 0
+R16
+R17
+Abehavioral
+R38
+R6
+R7
+DEx4 work 17 multiplier_4x4_tb 0 22 6jnnGVCdi7@@gjoP8]@NL2
+!i122 5
+l21
+L8 48
+Vm<:D]^k^:B2L`_JUZgh9E1
+!s100 VBnVm>j864C2I>AWHQdgK2
+R11
+32
+R21
+!i10b 1
+R22
+R46
+R47
+!i113 0
+R16
+R17

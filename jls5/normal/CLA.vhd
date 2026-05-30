@@ -1,0 +1,45 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity CLA_4bit is
+    Port ( A     : in  STD_LOGIC_VECTOR (3 downto 0);
+           B     : in  STD_LOGIC_VECTOR (3 downto 0);
+           Cin   : in  STD_LOGIC;
+           Sum   : out STD_LOGIC_VECTOR (3 downto 0);
+           Cout  : out STD_LOGIC);
+end CLA_4bit;
+
+architecture Behavioral of CLA_4bit is
+    signal P, G : STD_LOGIC_VECTOR (3 downto 0);
+    signal C    : STD_LOGIC_VECTOR (4 downto 0);
+begin
+
+    P <= A XOR B;
+    G <= A AND B;
+
+    C(0) <= Cin;
+ 
+    C(1) <= G(0) OR 
+    (P(0) AND C(0));
+
+    C(2) <= G(1) OR 
+    (P(1) AND G(0)) 
+    OR (P(1) AND P(0) AND C(0));  
+
+    C(3) <= G(2) OR 
+   (P(2) AND G(1)) OR 
+   (P(2) AND P(1) AND G(0))
+   OR (P(2) AND P(1) AND P(0) AND C(0));
+
+    C(4) <= G(3) OR 
+   (P(3) AND G(2)) OR 
+   (P(3) AND P(2) AND G(1)) OR  
+   (P(3) AND P(2) AND P(1) AND G(0)) OR 
+   (P(3) AND P(2) AND P(1) AND P(0) AND C(0));
+    
+    Sum <= P XOR C(3 downto 0);
+    
+    Cout <= C(4);
+
+end Behavioral;
+
