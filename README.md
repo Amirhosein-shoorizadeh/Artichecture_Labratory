@@ -1,2 +1,4 @@
 enjoy it
-for uploading in courses i comfort them to text Just copy Them
+
+for uploading in courses i change them to text 
+Just copy Them
