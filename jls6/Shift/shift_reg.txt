@@ -1,0 +1,122 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity shift_reg is
+Port ( 
+        P_in : in STD_LOGIC_VECTOR(3 downto 0);
+        lr : in STD_LOGIC_VECTOR(1 downto 0);
+	load : in  STD_LOGIC;
+        reset : in  STD_LOGIC;
+        clk :in  STD_LOGIC;
+        reg_out : out STD_LOGIC_VECTOR(3 downto 0)
+);
+end shift_reg;
+
+architecture Behavioral of shift_reg is
+signal reg : STD_LOGIC_VECTOR(3 downto 0) := "0000";
+begin
+	CMB : process(clk)
+	begin
+	if(clk'event and clk = '1') then
+		if(reset = '1') then
+			reg <= "0000";
+		elsif(load = '1') then
+		        reg <= P_in;
+                elsif(lr = "01") then
+                        reg(0)<=reg(1);
+                        reg(1)<=reg(2);
+			reg(2)<=reg(3);
+			reg(3)<='0';
+		elsif(lr = "11") then
+                        reg(0)<=reg(1);
+                        reg(1)<=reg(2);
+			reg(2)<=reg(3);
+	        elsif(lr = "10") then
+                        reg(3)<=reg(2);
+                        reg(2)<=reg(1);
+			reg(1)<=reg(0);
+			reg(0)<='0';
+		end if;
+		reg_out<=reg;
+	end if;
+	end process;
+end Behavioral;
+=============================================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity shift_reg_tb is
+end shift_reg_tb;
+
+architecture Behavioral of shift_reg_tb is
+
+    component shift_reg is
+        Port ( 
+	P_in : in STD_LOGIC_VECTOR(3 downto 0);
+        lr : in STD_LOGIC_VECTOR(1 downto 0);
+	load : in  STD_LOGIC;
+        reset : in  STD_LOGIC;
+        clk :in  STD_LOGIC;
+        reg_out : out STD_LOGIC_VECTOR(3 downto 0));
+    end component;
+	signal P_in : STD_LOGIC_VECTOR(3 downto 0);
+        signal lr : STD_LOGIC_VECTOR(1 downto 0);
+	signal load : STD_LOGIC;
+        signal reset : STD_LOGIC;
+        signal clk : STD_LOGIC;
+        signal reg_out : STD_LOGIC_VECTOR(3 downto 0);
+constant clk_period : time := 10 ns;
+
+begin
+
+    UUT: shift_reg port map (
+	P_in=> P_in,
+        lr=>lr,
+        load=> load,
+        reset=> reset,
+        clk=> clk,
+	reg_out=> reg_out);
+    clk_process: process
+    begin
+        clk <= '0';
+        wait for clk_period / 2;
+        clk <= '1';
+        wait for clk_period / 2;
+    end process;
+
+    stimulus_process: process
+    begin
+        lr <= "00";
+        reset <='0';
+        P_in <= "1010";
+	load <= '1';
+	wait for 3ns;
+	wait for clk_period;
+	load <= '0';
+	wait for clk_period;
+	lr <= "01";
+        wait for clk_period;
+        wait for clk_period;
+        lr <= "10";
+        wait for clk_period;
+	wait for clk_period;
+	lr <= "11";
+        wait for clk_period;
+        reset <= '1'; 
+        wait for clk_period;
+        wait;
+    end process;
+
+end Behavioral;
+=============================================================
+ثبات شیفت دهنده
+به صورت اولویت دار به ترتیب ریست لود و شیفت
+در ریست مقدار ثبات را 0 میکنیم
+در لود مقدار ورودی را به ثبات انتقال میدهیم
+در شیفت به ازای مقادیر مختلف lr :
+00 : هیچ شیفتی انجام نشود
+01 : شیفت به سمت راست
+11 : شیفت ریاضی به سمت راست با حفظ بیت علامت
+10 : شیفت به سمت چپ
+شیفت در کد به صورت بیت به بیت انجام شده
+به علت نحوه پیاده سازی کد جواب ها با یک کلاک تاخیر در خروجی نوشته میشوند
