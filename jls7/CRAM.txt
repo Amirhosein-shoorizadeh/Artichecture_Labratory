@@ -1,0 +1,190 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity cam is
+    generic (
+	 d : INTEGER := 8;
+	 c : INTEGER := 3;
+         w : INTEGER := 4
+);
+    port (
+        rd : in std_logic;
+        wr : in std_logic;
+        rst : in std_logic;
+        clk : in std_logic;
+        match : out std_logic;
+        data : in std_logic_vector(w-1 downto 0)
+    );
+end cam;
+
+architecture Content_Addressable_Memorry of cam is
+type mem is array ((d)- 1 downto 0) of std_logic_vector(w - 1 downto 0);
+signal memory : mem;
+
+signal empty : std_logic_vector(w-1 downto 0) := (others => '0');
+
+begin			
+    process(rd,wr,rst,data,memory,clk)
+    variable find : std_logic;
+    begin
+        if (rst = '0') then 
+            for i in 0 to (d)-1 loop
+		memory(i) <= empty;		 
+            end loop;
+	    match <= '0';
+	elsif (rising_edge(clk)) then 
+            if(rd = '1') then
+                match <= '0'; 
+		for i in 0 to (d)-1 loop
+			if (data = memory(i)) then
+				match <= '1';
+			end if;
+		end loop;			 
+            elsif(wr = '1') then
+		find := '0';
+		for i in 0 to (d)-1 loop
+			if (data = memory(i)) then
+				find := '1';
+			end if;
+		end loop;
+		if(find = '0') then
+			for i in 0 to (d)-1 loop
+				if (empty = memory(i)) then 
+					memory(i) <= data;
+					exit;
+				end if;
+			end loop;
+		end if;
+            end if;
+        end if;	  
+    end process;
+end Content_Addressable_Memorry;
+
+
+=============================================================================
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity tb_cam is
+end tb_cam;
+
+architecture behavior of tb_cam is
+
+    component cam is
+        generic (
+            d : INTEGER := 8;
+            c : INTEGER := 3;
+            w : INTEGER := 4
+        );
+        port (
+            rd : in std_logic;
+            wr : in std_logic;
+            rst : in std_logic;
+            clk : in std_logic;
+            match : out std_logic;
+            data : in std_logic_vector(w-1 downto 0)
+        );
+    end component;
+
+    constant w : integer := 4;
+    constant c : integer := 3;
+    constant d : integer := 8;
+
+    signal clk_tb     : std_logic := '0';
+    signal rst_tb     : std_logic := '1';
+    signal rd_tb      : std_logic := '0';
+    signal wr_tb      : std_logic := '0';
+    signal data_tb    : std_logic_vector(w-1 downto 0) := (others => '0');
+    signal match_tb   : std_logic;
+
+    constant clk_period : time := 10 ns;
+
+begin
+
+    uut: cam
+        generic map (
+            d => d,
+            c => c,
+            w => w
+        )
+        port map (
+            clk => clk_tb,
+            rst => rst_tb,
+            rd => rd_tb,
+            wr => wr_tb,
+            data => data_tb,
+            match => match_tb
+        );
+
+    clk_process :process
+    begin
+        while now < 300 ns loop
+            clk_tb <= '0';
+            wait for clk_period / 2;
+            clk_tb <= '1';
+            wait for clk_period / 2;
+        end loop;
+        wait;
+    end process;
+
+    stim_proc: process
+    begin
+        rst_tb <= '0';
+        wait for clk_period;wait for clk_period;
+        rst_tb <= '1';
+        wait for clk_period;
+        wr_tb <= '1';
+        rd_tb <= '0';
+        data_tb <= "0001"; wait for clk_period;
+        data_tb <= "0010"; wait for clk_period;
+        data_tb <= "0011"; wait for clk_period;
+        data_tb <= "0100"; wait for clk_period;
+        wr_tb <= '0'; wait for clk_period;
+        rd_tb <= '1';
+        data_tb <= "0100"; wait for clk_period; 
+        data_tb <= "1000"; wait for clk_period; 
+        rd_tb <= '0'; wait for clk_period;
+        wr_tb <= '1';
+        data_tb <= "0001"; wait for clk_period; 
+        wr_tb <= '0'; wait;
+        wait;
+    end process;
+
+end behavior;
+
+=======================================================
+شرح عملکرد حافظه محتواپذیر (Content Addressable Memory – CAM) با معماری ریست سنکرون اکتیو لو:
+
+در این طراحی، یک حافظه CAM داریم که عملکرد آن به صورت زیر است:
+
+۱. ریست شدن (Reset):
+یک سیگنال به نام RST داریم که با سطح منطقی صفر فعال می‌شود (active low).
+زمانی که RST = 0 باشد، کل حافظه (همه سلول‌ها) بدون توجه به کلاک، مقدار صفر می‌گیرند.
+
+۲. لبه صعودی کلاک (Rising edge):
+پس از پایان ریست و در اولین لبه صعودی کلاک، ابتدا سیگنال R_D (Read) بررسی می‌شود.
+
+اگر R_D = 1 باشد، عملیات خواندن انجام می‌شود:
+داده ورودی (Data_in) با تمام خانه‌های حافظه مقایسه می‌شود (جستجوی همزمان در کل حافظه).
+اگر داده ورودی در یکی از خانه‌ها وجود داشت، خروجی MATCH برابر با 1 می‌شود.
+در غیر این صورت (پیدا نشد)، MATCH = 0 خواهد بود.
+(دقت کنید: عملیات خواندن دقیقاً یک کلاک طول می‌کشد و نتیجه Match در همان سیکل مشخص می‌شود.)
+
+۳. عملیات نوشتن (Write):
+بعد از بررسی R_D (یا در همان سیکل کلاک، بسته به طراحی کنترل‌کننده)، سیگنال W_R برای نوشتن بررسی می‌شود:
+
+ابتدا بررسی می‌کنیم که آیا داده ورودی قبلاً در حافظه وجود دارد یا نه (با جستجوی مشابه حالت خواندن).
+
+اگر داده موجود بود، هیچ نوشتنی انجام نمی‌شود (از ذخیره تکراری جلوگیری می‌شود).
+
+اگر داده موجود نبود، حافظه را خانه‌به‌خانه جستجو می‌کنیم تا اولین آدرس خالی (خانه‌ای که مقدار صفر دارد) را پیدا کنیم.
+به محض پیدا شدن اولین خانه خالی، داده ورودی را در آن آدرس می‌نویسیم و بلافاصله از حلقه خارج می‌شویم.
+(توجه: اگر حافظه کاملاً پر باشد و خانه خالی نباشد، عملیات نوشتن انجام نمی‌شود یا خطا صادر می‌شود.)
+
+

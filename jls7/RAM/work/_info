@@ -1,0 +1,214 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Artichecture_Labratory/jls6/Booth
+T_opt
+!s110 1780224132
+VfP1i:5MMh;g9Sb?eQ84550
+04 6 4 work tb_ram test 1
+=1-04ecd8c4ec49-6a1c1084-19a-4694
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+T_opt1
+!s110 1780222502
+V1OFHIIzhcH7af]3lEFVZ^0
+04 16 8 work tb_ram_dual_port behavior 1
+=1-04ecd8c4ec49-6a1c0a26-9b-5554
+R1
+R2
+n@_opt1
+R3
+R0
+T_opt2
+!s110 1780223819
+VI5T;41_HVUJGncKf9AkRY2
+04 13 10 work ram_dual_port behavioral 1
+=1-04ecd8c4ec49-6a1c0f4b-226-42b0
+R1
+R2
+n@_opt2
+R3
+R0
+Eram
+Z4 w1780223629
+Z5 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 16
+Z8 dD:/Artichecture_Labratory/jls7/RAM
+Z9 8D:\Artichecture_Labratory\jls7\RAM\RAM.vhd
+Z10 FD:\Artichecture_Labratory\jls7\RAM\RAM.vhd
+l0
+L5 1
+VVX`c_8;:OnIUkR^_H82U30
+!s100 CRNCSPfAEE<k1oSIEbfJj0
+Z11 OL;C;2020.4;71
+32
+Z12 !s110 1780224123
+!i10b 1
+Z13 !s108 1780224123.000000
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls7\RAM\RAM.vhd|
+Z15 !s107 D:\Artichecture_Labratory\jls7\RAM\RAM.vhd|
+!i113 0
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1 CvgOpt 0
+Artl
+R5
+R6
+R7
+Z18 DEx4 work 3 ram 0 22 VX`c_8;:OnIUkR^_H82U30
+!i122 16
+l29
+L24 26
+VoBH6TG7bm6_E:=D<gA<Ul1
+!s100 a_4>6F[oS[0XSbUBh<1[e1
+R11
+32
+R12
+!i10b 1
+R13
+R14
+R15
+!i113 0
+R16
+R17
+Eram_dual_port
+Z19 w1780222465
+R5
+R6
+R7
+!i122 18
+R8
+Z20 8D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL.vhd
+Z21 FD:\Artichecture_Labratory\jls7\RAM\RAM_DUAL.vhd
+l0
+L5 1
+V=bI]kOVF@bUamPASaNhVz3
+!s100 UYVP7O3AnMOPkGcibVd452
+R11
+32
+R12
+!i10b 1
+R13
+Z22 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL.vhd|
+Z23 !s107 D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL.vhd|
+!i113 0
+R16
+R17
+Abehavioral
+R5
+R6
+R7
+Z24 DEx4 work 13 ram_dual_port 0 22 =bI]kOVF@bUamPASaNhVz3
+!i122 18
+l37
+L34 31
+VR?WXP:BUC4:oB@PiMZ`be1
+!s100 @9KRC9=A>3ZIm:MbkYWLP2
+R11
+32
+R12
+!i10b 1
+R13
+R22
+R23
+!i113 0
+R16
+R17
+Etb_ram
+Z25 w1780224118
+R5
+R6
+R7
+!i122 17
+R8
+Z26 8D:\Artichecture_Labratory\jls7\RAM\RAM_tb.vhd
+Z27 FD:\Artichecture_Labratory\jls7\RAM\RAM_tb.vhd
+l0
+L5 1
+V:<G<c>`1BdB6X8JSXU8m23
+!s100 3ngR[1aBMCJh4gMZ25nnf0
+R11
+32
+R12
+!i10b 1
+R13
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls7\RAM\RAM_tb.vhd|
+Z29 !s107 D:\Artichecture_Labratory\jls7\RAM\RAM_tb.vhd|
+!i113 0
+R16
+R17
+Atest
+R18
+R5
+R6
+R7
+DEx4 work 6 tb_ram 0 22 :<G<c>`1BdB6X8JSXU8m23
+!i122 17
+l21
+L8 77
+VX6T1nHBLGT?fH]fG3DVKE2
+!s100 n:N9ZH1VS=CR;^[[1BB<F0
+R11
+32
+R12
+!i10b 1
+R13
+R28
+R29
+!i113 0
+R16
+R17
+Etb_ram_dual_port
+Z30 w1780222849
+R5
+R6
+R7
+!i122 19
+R8
+Z31 8D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL_tb.vhd
+Z32 FD:\Artichecture_Labratory\jls7\RAM\RAM_DUAL_tb.vhd
+l0
+L5 1
+V>^W:;GnoOP:EA1Lg82V=J1
+!s100 f6S_Vl5XDYTfHc<KH5Zj^0
+R11
+32
+R12
+!i10b 1
+R13
+Z33 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL_tb.vhd|
+Z34 !s107 D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL_tb.vhd|
+!i113 0
+R16
+R17
+Abehavior
+R24
+R5
+R6
+R7
+DEx4 work 16 tb_ram_dual_port 0 22 >^W:;GnoOP:EA1Lg82V=J1
+!i122 19
+l20
+L8 105
+V`;FeT[4154CfkQXF@mePX0
+!s100 c4TOn5OIHU]D8Qai?fhQ?3
+R11
+32
+R12
+!i10b 1
+R13
+R33
+R34
+!i113 0
+R16
+R17

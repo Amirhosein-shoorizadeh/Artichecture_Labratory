@@ -1,0 +1,324 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Artichecture_Labratory/jls7/ROM
+T_opt1
+!s110 1780829861
+V5ODJ<?o@GVNLChC^J;[3I0
+04 20 8 work tb_restoring_divider behavior 1
+=1-04ecd8c4ec49-6a254ea5-112-5fdc
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt1
+Z3 OL;O;2020.4;71
+R0
+Edivider_8by4
+Z4 w1780829205
+Z5 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 8
+Z8 dD:/Artichecture_Labratory/jls8/Divider
+Z9 8D:\Artichecture_Labratory\jls8\Divider\Divider.vhd
+Z10 FD:\Artichecture_Labratory\jls8\Divider\Divider.vhd
+l0
+L5 1
+Vm>ATHYFWa3VSnX1P6hAUP0
+!s100 kYF]FGQJo[CYV6?R7j?lm0
+Z11 OL;C;2020.4;71
+32
+Z12 !s110 1780829212
+!i10b 1
+Z13 !s108 1780829212.000000
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls8\Divider\Divider.vhd|
+Z15 !s107 D:\Artichecture_Labratory\jls8\Divider\Divider.vhd|
+!i113 0
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1 CvgOpt 0
+Abehavioral
+R5
+R6
+R7
+Z18 DEx4 work 12 divider_8by4 0 22 m>ATHYFWa3VSnX1P6hAUP0
+!i122 8
+l28
+L18 59
+VEjJS3^Slb]NL_Kni]5=4E3
+!s100 KI[@K]U;3iLZ?NUjW0;oJ3
+R11
+32
+R12
+!i10b 1
+R13
+R14
+R15
+!i113 0
+R16
+R17
+Edivider_8by4_4bit_quotient
+Z19 w1780827422
+R5
+R6
+R7
+!i122 4
+R8
+R9
+R10
+l0
+L5 1
+VPEMN>9@zL=aVhI]<n2cUQ1
+!s100 ]lUScE9M7<4d;Ti[ljmkY3
+R11
+32
+Z20 !s110 1780827654
+!i10b 1
+Z21 !s108 1780827654.000000
+R14
+R15
+!i113 0
+R16
+R17
+Aarch
+R5
+R6
+R7
+Z22 DEx4 work 26 divider_8by4_4bit_quotient 0 22 PEMN>9@zL=aVhI]<n2cUQ1
+!i122 4
+l26
+L20 70
+V>P>Jz^zRKm=eB3[M[K?dh0
+!s100 `U95f_@2<<kB]1Qb1ESZL1
+R11
+32
+R20
+!i10b 1
+R21
+R14
+R15
+!i113 0
+R16
+R17
+Erestoring_divider
+Z23 w1780829793
+R5
+R6
+R7
+!i122 10
+R8
+R9
+R10
+l0
+L5 1
+VSMzG9an^aPH?O:]?ii5<^2
+!s100 :g1XjZ2:6G266Z1fadEY;2
+R11
+32
+Z24 !s110 1780829842
+!i10b 1
+Z25 !s108 1780829841.000000
+R14
+R15
+!i113 0
+R16
+R17
+Abehavioral
+R5
+R6
+R7
+Z26 DEx4 work 17 restoring_divider 0 22 SMzG9an^aPH?O:]?ii5<^2
+!i122 10
+l30
+L22 92
+V9la8<joz=JZ1kcBd>Bnf93
+!s100 2[61fA5@i==Hz9oBfH4R;0
+R11
+32
+R24
+!i10b 1
+R25
+R14
+R15
+!i113 0
+R16
+R17
+Artl
+R5
+R6
+R7
+Z27 DEx4 work 17 restoring_divider 0 22 0GHWX@djG_bH?nO<@[Y;f2
+!i122 6
+l29
+L19 87
+VjUbN96P1lBlRG@;Vbh[V61
+!s100 M2fYI3;Xcn=Dn=EfU>4`21
+R11
+32
+Z28 !s110 1780827799
+!i10b 1
+Z29 !s108 1780827799.000000
+R14
+R15
+!i113 0
+R16
+R17
+w1780827791
+Etb
+Z30 w1780827073
+R5
+R6
+R7
+!i122 1
+R8
+Z31 8D:\Artichecture_Labratory\jls8\Divider\Divider_tb.vhd
+Z32 FD:\Artichecture_Labratory\jls8\Divider\Divider_tb.vhd
+l0
+L5 1
+V?a^Ya;bJIL[[R4`F_RY3K2
+!s100 PeL[mLZk@S=g5JIHAQSGJ3
+R11
+32
+Z33 !s110 1780827080
+!i10b 1
+Z34 !s108 1780827080.000000
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Artichecture_Labratory\jls8\Divider\Divider_tb.vhd|
+Z36 !s107 D:\Artichecture_Labratory\jls8\Divider\Divider_tb.vhd|
+!i113 0
+R16
+R17
+Atest
+R22
+R5
+R6
+R7
+DEx4 work 2 tb 0 22 ?a^Ya;bJIL[[R4`F_RY3K2
+!i122 1
+l13
+L7 39
+VZf;ba6?Y`94nN[@JEDZW20
+!s100 hMcA<G^imbcJ^nCOT7`XS1
+R11
+32
+R33
+!i10b 1
+R34
+R35
+R36
+!i113 0
+R16
+R17
+Etb_divider
+Z37 w1780829204
+R6
+R7
+!i122 9
+R8
+R31
+R32
+l0
+L4 1
+V91CfJoVOA`^^5aPJ4P19X0
+!s100 @;7nUWb06VLDd3zh[fe=12
+R11
+32
+R12
+!i10b 1
+R13
+R35
+R36
+!i113 0
+R16
+R17
+Asim
+R5
+R18
+R6
+R7
+DEx4 work 10 tb_divider 0 22 91CfJoVOA`^^5aPJ4P19X0
+!i122 9
+l19
+L7 57
+V?TXINUScCl=P1JVzm^S^Y1
+!s100 UQbnMl1_[Wcg5:Oe;2l?j3
+R11
+32
+R12
+!i10b 1
+R13
+R35
+R36
+!i113 0
+R16
+R17
+Etb_restoring_divider
+Z38 w1780829838
+R5
+R6
+R7
+!i122 11
+R8
+R31
+R32
+l0
+L5 1
+VP@NjkYZ7Ile<KXG=_9JOl1
+!s100 jfg`OiEcIZa>Y>SQL>1=_0
+R11
+32
+R24
+!i10b 1
+Z39 !s108 1780829842.000000
+R35
+R36
+!i113 0
+R16
+R17
+Abehavior
+R26
+R5
+R6
+R7
+DEx4 work 20 tb_restoring_divider 0 22 P@NjkYZ7Ile<KXG=_9JOl1
+!i122 11
+l17
+L8 71
+VH10mShkLdla1^hF@I3T[N0
+!s100 0g2CeA<bCg7aKe;mN@ZP02
+R11
+32
+R24
+!i10b 1
+R39
+R35
+R36
+!i113 0
+R16
+R17
+Asim
+R27
+R5
+R6
+R7
+DEx4 work 20 tb_restoring_divider 0 22 [U7HA_P;h93Mm;BR;2?DJ1
+!i122 7
+l21
+L8 80
+VQ5718CYKMo?g>naOVIY[:1
+!s100 ;jKg`Uc^S;Kd>Y6Td1^IT0
+R11
+32
+R28
+!i10b 1
+R29
+R35
+R36
+!i113 0
+R16
+R17
+w1780827778

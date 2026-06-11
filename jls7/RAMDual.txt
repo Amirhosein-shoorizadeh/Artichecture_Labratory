@@ -1,0 +1,294 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity ram_dual_port is
+    generic (
+        W : integer := 8;
+        C : integer := 4
+    );
+    port (
+     
+        wr_A : in std_logic;
+        wr_B : in std_logic;
+      
+        rd_A : in std_logic;
+        rd_B : in std_logic;
+     
+        clk : in std_logic;
+     
+        addr_RD : in std_logic_vector(C-1 downto 0);
+   
+        addr_WR : in std_logic_vector(C-1 downto 0);
+  
+        rst : in std_logic;
+   
+        data_in_A : in std_logic_vector(W-1 downto 0);
+        data_in_B : in std_logic_vector(W-1 downto 0);
+ 
+        data_out_A : out std_logic_vector(W-1 downto 0);
+        data_out_B : out std_logic_vector(W-1 downto 0)
+    );
+end ram_dual_port;
+
+architecture Behavioral of ram_dual_port is
+    type mem is array ((2 ** C) - 1 downto 0) of std_logic_vector(W - 1 downto 0);
+    signal memory : mem;
+begin
+    process(rst, clk)
+    begin
+        if(rst = '0') then
+            for i in 0 to (2 ** C) - 1 loop
+                memory(i) <= std_logic_vector(to_unsigned(i, W));
+            end loop;
+        elsif(rising_edge(clk)) then
+            
+            if(wr_A = '1') then
+                memory(to_integer(unsigned(addr_WR))) <= data_in_A;
+            end if;
+            
+            if(rd_A = '1') then
+                data_out_A <= memory(to_integer(unsigned(addr_RD)));
+            end if;
+            
+        
+            if(wr_B = '1') then
+                memory(to_integer(unsigned(addr_WR))) <= data_in_B;
+            end if;
+            
+            if(rd_B = '1') then
+                data_out_B <= memory(to_integer(unsigned(addr_RD)));
+            end if;
+        end if;
+    end process;
+end Behavioral;
+============================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity tb_ram_dual_port is
+end tb_ram_dual_port;
+
+architecture behavior of tb_ram_dual_port is
+    constant W : integer := 8;
+    constant C : integer := 4;
+    constant clk_period : time := 10 ns;
+
+    signal wr_A, wr_B, rd_A, rd_B : std_logic := '0';
+    signal clk : std_logic := '0';
+    signal addr_RD, addr_WR : std_logic_vector(C-1 downto 0) := (others => '0');
+    signal rst : std_logic := '0';
+    signal data_in_A, data_in_B : std_logic_vector(W-1 downto 0) := (others => '0');
+    signal data_out_A, data_out_B : std_logic_vector(W-1 downto 0);
+
+begin
+    uut: entity work.ram_dual_port
+        generic map(W => W, C => C)
+        port map(
+            wr_A => wr_A, wr_B => wr_B,
+            rd_A => rd_A, rd_B => rd_B,
+            clk => clk,
+            addr_RD => addr_RD,
+            addr_WR => addr_WR,
+            rst => rst,
+            data_in_A => data_in_A,
+            data_in_B => data_in_B,
+            data_out_A => data_out_A,
+            data_out_B => data_out_B
+        );
+
+
+    clk <= not clk after clk_period/2;
+
+
+    process
+    begin
+        -- Rst
+        rst <= '0';
+        wait for 20 ns;
+        rst <= '1';
+        wait for 20 ns;
+        
+        -- Write A at  0
+        wr_A <= '1';
+        addr_WR <= "0000";
+        data_in_A <= x"AA";
+        wait for clk_period;
+        wr_A <= '0';
+        
+        --  Read A from 0
+        rd_A <= '1';
+        addr_RD <= "0000";
+        wait for clk_period;
+        rd_A <= '0';
+        
+        -- Write B at 1
+        wr_B <= '1';
+        addr_WR <= "0001";
+        data_in_B <= x"BB";
+        wait for clk_period;
+        wr_B <= '0';
+        
+        -- Read B from  1
+        rd_B <= '1';
+        addr_RD <= "0001";
+        wait for clk_period;
+        rd_B <= '0';
+        
+        --  
+        wr_A <= '1';
+        rd_B <= '1';
+        addr_WR <= "0010";
+        addr_RD <= "0001";
+        data_in_A <= x"CC";
+        wait for clk_period;
+        wr_A <= '0';
+        rd_B <= '0';
+        
+        -- Write B and read A simultaneously
+        wr_B <= '1';
+        rd_A <= '1';
+        addr_WR <= "0011";
+        addr_RD <= "0010";
+        data_in_B <= x"DD";
+        wait for clk_period;
+        wr_B <= '0';
+        rd_A <= '0';
+        
+        --  Write 2tash  to yeki
+        wr_A <= '1';
+        wr_B <= '1';
+        addr_WR <= "0100";
+        data_in_A <= x"11";
+        data_in_B <= x"22";
+        wait for clk_period;
+        wr_A <= '0';
+        wr_B <= '0';
+        
+        -- 
+        rd_A <= '1';
+        addr_RD <= "0100";
+        wait for clk_period;
+        rd_A <= '0';
+        
+        wait;
+    end process;
+end behavior;
+======================================================
+ماژول اضلی 
+ این کد یه حافظه
+ RAM 
+دو درگاه (Dual-Port RAM) هست
+. یعنی دو راه داریم به حافظه دسترسی پیدا کنیم
+ یکی درگاه A
+ و یکی درگاه B.
+
+
+-- پارامترها (Generic):
+W = 8 : یعنی هر دیتا هشت بیتی هست.
+C = 4 : یعنی آدرس چهار بیتی هست، پس ۱۶ تا خونه داریم.
+
+-- ورودی و خروجی (Port):
+wr_A و wr_B : کلید نوشتن برای درگاه A و B.
+rd_A و rd_B : کلید خوندن برای درگاه A و B.
+clk : کلاک.
+addr_RD : آدرسی که میخوایم ازش بخونیم.
+addr_WR : آدرسی که میخوایم توش بنویسیم.
+rst : ریست. وقتی صفر بشه حافظه رو مقداردهی اولیه میکنه.
+data_in_A و data_in_B : دیتایی که میخوایم بنویسیم.
+data_out_A و data_out_B : دیتایی که میخونیم.
+
+ کار حافظه:
+--  تعریف حافظه
+type mem is array ((2 ** C) - 1 downto 0) of std_logic_vector(W - 1 downto 0);
+این خط یه آرایه میسازه به اندازه ۱۶ خونه. هر خونه ۸ بیت جا داره. اسمش رو گذاشتیم mem.
+
+signal memory : mem;
+یک سیگنال از نوع mem میسازیم به اسم memory. این همون حافظه اصلی ماست.
+
+--  پردازش (process)
+process(rst, clk)
+این process حساس هست به تغییرات rst و clk. یعنی هر کدوم از این دو تا عوض بشن، process اجرا میشه.
+
+-- قسمت ریست (rst)
+if(rst = '0') then
+    for i in 0 to (2 ** C) - 1 loop
+        memory(i) <= std_logic_vector(to_unsigned(i, W));
+    end loop;
+وقتی rst صفر میشه (اکتیو لو)، یه حلقه میزنیم از ۰ تا ۱۵. هر خونه رو مقداردهی میکنیم به شماره خودش.
+یعنی خونه ۰ میشه ۰، خونه ۱ میشه ۱، خونه ۲ میشه ۲ و ... تا خونه ۱۵ میشه ۱۵.
+(عددها رو تبدیل به باینری ۸ بیتی میکنه.)
+
+این یه جور مقداردهی اولیه هست، نه صفر کردن کامل.
+
+-- قسمت کلاک
+elsif(rising_edge(clk)) then
+در لبه بالارونده کلاک، کارهای زیر رو انجام بده:
+
+---- نوشتن با درگاه A:
+if(wr_A = '1') then
+    memory(to_integer(unsigned(addr_WR))) <= data_in_A;
+end if;
+اگر wr_A یک بود، دیتای data_in_A رو بریز توی آدرسی که addr_WR نشون میده.
+
+---- خوندن با درگاه A:
+if(rd_A = '1') then
+    data_out_A <= memory(to_integer(unsigned(addr_RD)));
+end if;
+اگر rd_A یک بود، برو از آدرسی که addr_RD نشون میده بخون و بذار توی data_out_A.
+
+---- نوشتن با درگاه B:
+if(wr_B = '1') then
+    memory(to_integer(unsigned(addr_WR))) <= data_in_B;
+end if;
+مثل درگاه A، اما با دیتای data_in_B.
+
+---- خوندن با درگاه B:
+if(rd_B = '1') then
+    data_out_B <= memory(to_integer(unsigned(addr_RD)));
+end if;
+مثل درگاه A، اما خروجی میره توی data_out_B.
+
+اما این  کد ما یه مشکل داره اونم اینه ab میتونن رو یکه خونه بخونن و بنویسن که به مشکل میخوریم
+--------------------------------------------------------------------------
+ماژول تست بنچ
+این یه تست‌بنچ برای RAM دو درگاهه هست.
+
+هدف: تست کردن عملکرد حافظه در سناریوهای مختلف.
+
+مراحل تست به ترتیب:
+
+1. ریست کردن حافظه به مدت 20ns (rst=0)، سپس غیرفعال کردن ریست
+
+2. نوشتن مقدار AA در آدرس 0 توسط درگاه A
+   سپس خواندن از آدرس 0 توسط درگاه A → باید AA بگیریم
+
+3. نوشتن مقدار BB در آدرس 1 توسط درگاه B
+   سپس خواندن از آدرس 1 توسط درگاه B → باید BB بگیریم
+
+4. همزمان: درگاه A در آدرس 2 مینویسد CC
+          درگاه B از آدرس 1 میخواند → باید BB بگیریم
+
+5. همزمان: درگاه B در آدرس 3 مینویسد DD
+          درگاه A از آدرس 2 میخواند → باید CC بگیریم
+
+6. نوشتن همزمان هر دو درگاه در آدرس 4
+   درگاه A میخواهد 11 بنویسد
+   درگاه B میخواهد 22 بنویسد
+   نتیجه نهایی بستگی به اولویت نوشتن در حافظه دارد
+
+7. خواندن از آدرس 4 توسط درگاه A
+   میبینیم کدام مقدار (11 یا 22) در حافظه مانده است
+
+سیگنال‌های کلیدی:
+- wr_A, wr_B : فعال‌کننده نوشتن
+- rd_A, rd_B : فعال‌کننده خواندن
+- addr_WR : آدرس نوشتن (مشترک بین A و B)
+- addr_RD : آدرس خواندن (مشترک بین A و B)
+- data_in_A, data_in_B : دیتای ورودی
+- data_out_A, data_out_B : دیتای خروجی
+
+طول هر عملیات: یک دوره کلاک (10ns)
+

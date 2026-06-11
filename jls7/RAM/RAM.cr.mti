@@ -1,0 +1,39 @@
+D:/Artichecture_Labratory/jls7/RAM/RAM.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {D:\Artichecture_Labratory\jls7\RAM\RAM.vhd}
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ram
+-- Compiling architecture rtl of ram
+
+} {} {}} D:/Artichecture_Labratory/jls7/RAM/RAM_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {D:\Artichecture_Labratory\jls7\RAM\RAM_tb.vhd}
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_ram
+-- Compiling architecture test of tb_ram
+-- Loading entity ram
+
+} {} {}} D:/Artichecture_Labratory/jls7/RAM/RAM_DUAL.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL.vhd}
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ram_dual_port
+-- Compiling architecture Behavioral of ram_dual_port
+
+} {} {}} D:/Artichecture_Labratory/jls7/RAM/RAM_DUAL_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {D:\Artichecture_Labratory\jls7\RAM\RAM_DUAL_tb.vhd}
+Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_ram_dual_port
+-- Compiling architecture behavior of tb_ram_dual_port
+-- Loading entity ram_dual_port
+
+} {} {}}

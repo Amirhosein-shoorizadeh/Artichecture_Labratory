@@ -1,0 +1,158 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.All;
+
+entity rom is
+
+generic(
+	W : integer := 8;
+	C : integer := 4
+	);
+	Port(
+		addr : in std_logic_vector(C-1 downto 0);
+		clk : in std_logic;
+		output_data : out std_logic_vector(W-1 downto 0)
+	);
+end rom;
+
+architecture Behavioral of rom is
+type reg is array ( 0 to (2 ** C )-1) of std_logic_vector(W-1 downto 0);
+signal romBlock : reg := (
+    "00000000",  
+    "00000001",     
+    "00000010",      
+    "00000100",     
+    "00001000",    
+    "00010000",      
+    "00100000",  
+    "01000000",    
+    "10000000",   
+    "11111111", 	    
+    "10101010",    
+    "01010101",    
+    "11001100",    
+    "00110011",    
+    "11110000",   
+    "00001111"     
+);
+
+begin
+	process(clk)
+	begin
+		if(rising_edge(clk)) then
+			output_data <= romBlock(to_integer(unsigned(addr)));
+		end if;
+	end process;
+
+
+end Behavioral;
+
+=======================================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity rom_tb is
+end entity;
+
+architecture behavior of rom_tb is
+
+    constant W : integer := 8;
+    constant C : integer := 4;
+
+    signal addr        : std_logic_vector(C - 1 downto 0) := (others => '0');
+    signal clk         : std_logic := '0';
+    signal output_data : std_logic_vector(W - 1 downto 0);
+
+    constant clk_period : time := 10 ns;
+
+begin
+
+    uut: entity work.rom
+        generic map (
+            W => W,
+            C => C
+        )
+        port map (
+            addr        => addr,
+            clk         => clk,
+            output_data => output_data
+        );
+
+    clk_process : process
+    begin
+        while true loop
+            clk <= '0';
+            wait for clk_period / 2;
+            clk <= '1';
+            wait for clk_period / 2;
+        end loop;
+    end process;
+
+    stim_proc : process
+    begin
+        for i in 0 to (2**C - 1) loop
+            addr <= std_logic_vector(to_unsigned(i, C));
+            wait for clk_period;
+        end loop;
+
+        wait for 20 ns;
+        wait;
+    end process;
+
+end architecture;
+====================================================
+این کد شامل دو بخش است: یک ROM (حافظه فقط خواندنی) و تست‌بنچ آن.
+
+بخش اول: ماژول ROM
+
+ویژگی‌ها:
+- W=8 : هر دیتا 8 بیتی
+- C=4 : آدرس 4 بیتی → 16 خانه حافظه
+
+ورودی‌ها:
+- addr : آدرس (4 بیت)
+- clk : کلاک
+
+خروجی:
+- output_data : دیتای خوانده شده (8 بیت)
+
+مقداردهی اولیه ROM (16 خانه):
+خانه 0 : 00000000 (0)
+خانه 1 : 00000001 (1)
+خانه 2 : 00000010 (2)
+خانه 3 : 00000100 (4)
+خانه 4 : 00001000 (8)
+خانه 5 : 00010000 (16)
+خانه 6 : 00100000 (32)
+خانه 7 : 01000000 (64)
+خانه 8 : 10000000 (128)
+خانه 9 : 11111111 (255)
+خانه 10: 10101010 (170)
+خانه 11: 01010101 (85)
+خانه 12: 11001100 (204)
+خانه 13: 00110011 (51)
+خانه 14: 11110000 (240)
+خانه 15: 00001111 (15)
+
+نحوه کار:
+- در لبه بالارونده کلاک، آدرس را میخواند
+- دیتای آن آدرس را از romBlock برمیدارد
+- به output_data میفرستد
+
+نکته: این ROM فقط خواندنی است و نمی‌توان در آن نوشت.
+
+==========================================
+بخش دوم: تست‌بنچ (rom_tb)
+
+
+مراحل:
+1. کلاک تولید میکند (هر 10ns یک دوره کامل)
+2. آدرس‌ها را از 0 تا 15 یکی یکی می‌دهد
+3. هر بار یک کلاک صبر میکند
+4. خروجی را مشاهده میکند (باید مقادیر بالا را به ترتیب بدهد)
+
+خروجی مورد انتظار به ترتیب آدرس:
+0, 1, 2, 4, 8, 16, 32, 64, 128, 255, 170, 85, 204, 51, 240, 15
+
+نکته فنی: این ROM سنکرون (با کلاک) طراحی شده، نه آسنکرون.

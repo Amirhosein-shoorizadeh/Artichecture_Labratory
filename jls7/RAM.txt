@@ -1,0 +1,233 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity ram is
+    generic (
+        DATA_WIDTH  : integer := 8;  
+        ADDR_WIDTH  : integer := 4   
+    );
+    port (
+        clk      : in  std_logic;                     
+        rst      : in  std_logic;                        
+        
+
+        wr_en    : in  std_logic;        
+        rd_en    : in  std_logic;                          
+        
+        addr     : in  std_logic_vector(ADDR_WIDTH-1 downto 0);
+        data_in  : in  std_logic_vector(DATA_WIDTH-1 downto 0);
+        data_out : out std_logic_vector(DATA_WIDTH-1 downto 0)
+    );
+end entity ram;
+
+architecture rtl of ram is
+    type ram_memory_t is array (0 to (2**ADDR_WIDTH)-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
+
+    signal memory : ram_memory_t;
+    signal data_out_reg : std_logic_vector(DATA_WIDTH-1 downto 0);
+begin
+
+    process(clk, rst)
+    begin
+        if rst = '0' then
+            for i in 0 to (2**ADDR_WIDTH)-1 loop
+                memory(i) <= (others => '0');
+            end loop;
+            data_out_reg <= (others => '0');            
+        elsif rising_edge(clk) then
+            if wr_en = '1' and rd_en = '0' then
+                memory(to_integer(unsigned(addr))) <= data_in;
+            end if;  
+            if rd_en = '1' and wr_en = '0' then
+                data_out_reg <= memory(to_integer(unsigned(addr)));
+            end if;
+        end if;
+    end process;
+    data_out <= data_out_reg;
+
+end architecture rtl;
+
+=========================================================================
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity tb_ram is
+end entity tb_ram;
+
+architecture test of tb_ram is
+    constant DATA_WIDTH : integer := 8;
+    constant ADDR_WIDTH : integer := 4;
+    constant CLK_PERIOD : time := 10 ns;
+    
+    signal clk      : std_logic := '0';
+    signal rst      : std_logic := '0';
+    signal wr_en    : std_logic := '0';
+    signal rd_en    : std_logic := '0';
+    signal addr     : std_logic_vector(ADDR_WIDTH-1 downto 0) := (others => '0');
+    signal data_in  : std_logic_vector(DATA_WIDTH-1 downto 0) := (others => '0');
+    signal data_out : std_logic_vector(DATA_WIDTH-1 downto 0);
+    
+begin
+
+    clk <= not clk after CLK_PERIOD/2;
+    
+
+    uut: entity work.ram
+        generic map (
+            DATA_WIDTH => DATA_WIDTH,
+            ADDR_WIDTH => ADDR_WIDTH
+        )
+        port map (
+            clk      => clk,
+            rst      => rst,
+            wr_en    => wr_en,
+            rd_en    => rd_en,
+            addr     => addr,
+            data_in  => data_in,
+            data_out => data_out
+        );
+    
+ 
+    process
+    begin
+        -- Reset
+        rst <= '1';
+        wait for 20 ns;
+        rst <= '0';
+        wait for 10 ns;
+        
+        -- Write  0 to 7
+        wr_en <= '1';
+        for i in 0 to 7 loop
+            addr   <= std_logic_vector(to_unsigned(i, ADDR_WIDTH));
+            data_in <= std_logic_vector(to_unsigned(i * 10, DATA_WIDTH));
+            wait for CLK_PERIOD;
+        end loop;
+        wr_en <= '0';
+        wait for CLK_PERIOD;
+        
+        -- Read  0 to 7
+        rd_en <= '1';
+        for i in 0 to 7 loop
+            addr <= std_logic_vector(to_unsigned(i, ADDR_WIDTH));
+            wait for CLK_PERIOD;
+        end loop;
+        rd_en <= '0';
+
+        wait for CLK_PERIOD;
+        rst <= '1';
+        wait for 15 ns;
+        rst <= '0';
+        wait for CLK_PERIOD;
+
+        rd_en <= '1';
+        for i in 0 to 3 loop
+            addr <= std_logic_vector(to_unsigned(i, ADDR_WIDTH));
+            wait for CLK_PERIOD;
+        end loop;
+        rd_en <= '0';
+        
+        wait;
+    end process;
+    
+end architecture test;
+====================================================================
+
+ماژول RAM (حافظه ساده)
+
+این یه حافظه RAM معمولی هست، نه CAM. فرقش اینه که آدرس می‌دهیم، دیتا می‌گیریم. بریم خط به خط:
+
+بخش entity:
+
+DATA_WIDTH = 8 : هر دیتا ۸ بیتی است.
+
+ADDR_WIDTH = 4 : آدرس ۴ بیتی است، یعنی ۱۶ خانه حافظه داریم (۲ به توان ۴).
+
+ورودی‌ها: کلاک، ریست، write enable، read enable، آدرس، دیتای ورودی.
+
+خروجی: دیتای خروجی.
+
+بخش architecture:
+
+type ram_memory_t is array : تعریف نوع آرایه‌ای به نام ram_memory_t که ۱۶ خانه دارد و هر خانه ۸ بیتی است.
+
+signal memory : سیگنال حافظه اصلی.
+
+signal data_out_reg : رجیستر خروجی (چون خروجی حافظه معمولاً رجیستر می‌شود).
+
+بخش process (حساس به کلاک و ریست):
+
+ریست ناهمزمان (asynchronous reset):
+if rst = '0' then : وقتی ریست صفر می‌شود (اکتیو لو)، کل حافظه و رجیستر خروجی صفر می‌شوند.
+حلقه for i in 0 to 15 تمام خانه‌ها را صفر می‌کند.
+
+لبه بالارونده کلاک:
+
+شرط نوشتن: if wr_en = '1' and rd_en = '0' then : اگر write enable یک بود و read enable صفر بود، دیتای ورودی را در آدرس داده شده بنویس.
+
+شرط خواندن: if rd_en = '1' and wr_en = '0' then : اگر read enable یک بود و write enable صفر بود، دیتای آن آدرس را در data_out_reg قرار بده.
+
+خروجی: data_out <= data_out_reg : مقدار رجیستر را به خروجی بفرست.
+
+نکات مهم:
+
+wr_en و rd_en همزمان با هم یک نمی‌شوند. اولویت با کسی نیست که زودتر آمده.
+
+آدرس با to_integer(unsigned(addr)) به عدد صحیح تبدیل می‌شود.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ ماژول تست (Testbench)
+
+این قسمت کار می‌کند که ماژول ram را تست کند.
+
+بخش constantها و signalها:
+
+CLK_PERIOD = 10 ns : هر ۱۰ نانوثانیه یک کلاک کامل.
+
+clk <= not clk after CLK_PERIOD/2 : هر ۵ نانوثانیه کلاک عوض می‌شود. یعنی فرکانس ۱۰۰ مگاهرتز.
+
+بخش process (محل نوشتن سناریوی تست):
+
+دنباله عملیات:
+
+ابتدا ریست:
+
+rst <= '1' : ۲۰ نانوثانیه صبر کن.
+
+rst <= '0' : ۱۰ نانوثانیه صبر کن. (در این مدت ریست فعال است.)
+
+نوشتن دیتاهای ۰ تا ۷:
+
+wr_en <= '1' : فعال کردن write.
+
+حلقه از ۰ تا ۷:
+آدرس = i
+دیتا = i * 10 (یعنی آدرس ۰ می‌شود ۰، آدرس ۱ می‌شود ۱۰، آدرس ۲ می‌شود ۲۰، ...)
+
+هر بار یک کلاک کامل صبر می‌کند (wait for CLK_PERIOD).
+
+خواندن دیتاهای ۰ تا ۷:
+
+rd_en <= '1' : فعال کردن read.
+
+حلقه از ۰ تا ۷: آدرس = i. هر بار یک کلاک صبر کن.
+
+در هر کلاک، data_out باید همان مقداری باشد که قبلاً نوشته شده.
+
+دوباره ریست:
+
+rst <= '1' : ۱۵ نانوثانیه صبر کن (فعال شدن ریست).
+
+rst <= '0' : یک کلاک صبر کن.
+
+بعد از ریست، دوباره خواندن آدرس ۰ تا ۳:
+
+چون حافظه ریست شده، همه دیتاها صفر هستند. پس data_out باید ۰ باشد.
+
+خروجی تست: چیزی چاپ نمی‌شود. فقط باید در شبیه‌ساز (مثل ModelSim) شکل موج‌ها را ببینی.
