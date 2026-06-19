@@ -1,0 +1,153 @@
+m255
+K4
+z2
+!s11e vcom 2020.4 2020.10, Oct 13 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/modeltech64_2020.4/examples
+T_opt
+!s110 1781831961
+VnLN7FQb8NRDQ>F^I4K=2R0
+Z1 04 11 3 work tb_cpu8bit2 sim 1
+=1-04ecd8c4ec49-6a349919-293-73e4
+o-quiet -auto_acc_if_foreign -work work
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;2020.4;71
+R0
+T_opt1
+!s110 1781856365
+V5oiC2=zXFmTbFnVbZd`kH2
+R1
+=1-04ecd8c4ec49-6a34f86d-82-6f60
+Z4 o-quiet -auto_acc_if_foreign -work work +acc
+R2
+n@_opt1
+R3
+R0
+T_opt2
+!s110 1781858228
+VY7hfRMXLLYnX42NYHX<>o0
+04 11 8 work tb_cpu8bit2 behavior 1
+=1-04ecd8c4ec49-6a34ffb4-2a4-5558
+R4
+R2
+n@_opt2
+R3
+Ecpu8bit2
+Z5 w1781856349
+Z6 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z7 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z9 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 24
+Z10 dD:/Artichecture_Labratory/jls9/cpu
+Z11 8D:/Artichecture_Labratory/jls9/cpu/cpu.vhd
+Z12 FD:/Artichecture_Labratory/jls9/cpu/cpu.vhd
+l0
+L8 1
+Vh=UCS[jE<KBdi7S]l0c991
+!s100 Uz`ZXWiCY7ME=Ag;RLaW60
+Z13 OL;C;2020.4;71
+32
+Z14 !s110 1781858215
+!i10b 1
+Z15 !s108 1781858215.000000
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls9/cpu/cpu.vhd|
+Z17 !s107 D:/Artichecture_Labratory/jls9/cpu/cpu.vhd|
+!i113 0
+Z18 o-work work -2002 -explicit
+Z19 tExplicit 1 CvgOpt 0
+Acpu_arch
+R6
+R7
+R8
+R9
+Z20 DEx4 work 8 cpu8bit2 0 22 h=UCS[jE<KBdi7S]l0c991
+!i122 24
+l27
+L19 98
+VNR5<bk2oLDY;V]:]:IQ2j0
+!s100 giG@KFMSXj8[AQQUURScP0
+R13
+32
+R14
+!i10b 1
+R15
+R16
+R17
+!i113 0
+R18
+R19
+Etb_cpu8bit2
+Z21 w1781858213
+R6
+R7
+R8
+R9
+!i122 25
+R10
+Z22 8D:/Artichecture_Labratory/jls9/cpu/cpu_tb.vhd
+Z23 FD:/Artichecture_Labratory/jls9/cpu/cpu_tb.vhd
+l0
+L5 1
+VHM`^:@d[VBNJBo9c;B[<33
+!s100 KS6dImlG`a7H[3WSc4WA01
+R13
+32
+R14
+!i10b 1
+R15
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Artichecture_Labratory/jls9/cpu/cpu_tb.vhd|
+Z25 !s107 D:/Artichecture_Labratory/jls9/cpu/cpu_tb.vhd|
+!i113 0
+R18
+R19
+Abehavior
+R6
+R7
+R8
+R9
+DEx4 work 11 tb_cpu8bit2 0 22 HM`^:@d[VBNJBo9c;B[<33
+!i122 25
+l71
+L8 103
+VgM=nQUO7kY5NLU5I:8a>V0
+!s100 1FzaMC;0@edNoda9d[NlH1
+R13
+32
+R14
+!i10b 1
+R15
+R24
+R25
+!i113 0
+R18
+R19
+Asim
+R20
+R6
+R7
+R8
+R9
+DEx4 work 11 tb_cpu8bit2 0 22 K4A@oa`g9Naz[X7=G3KO91
+!i122 3
+l54
+L8 101
+VLAIF8g@5kM0LI0AGDJ3Ob0
+!s100 KmnVgVi6A@6e]Sh2_U6EX1
+R13
+32
+!s110 1781856354
+!i10b 1
+!s108 1781856354.000000
+R24
+R25
+!i113 0
+R18
+R19
+w1781856261

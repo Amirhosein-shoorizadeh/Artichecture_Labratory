@@ -1,0 +1,272 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity Restoring_Divider is
+    generic (
+        N : integer := 4 
+    );
+    port (
+        clk       : in  std_logic;
+        reset     : in  std_logic;
+        start     : in  std_logic;
+        Dividend  : in  std_logic_vector(2*N-1 downto 0); 
+        Divisor   : in  std_logic_vector(N-1 downto 0);  
+        Quotient  : out std_logic_vector(N-1 downto 0);   
+        Remainder : out std_logic_vector(N-1 downto 0);   
+        Overflow  : out std_logic;                      
+        Ready     : out std_logic                        
+    );
+end Restoring_Divider;
+
+architecture Behavioral of Restoring_Divider is
+
+    type state_type is (IDLE, OVF_CHECK, SHIFT, SUB_RESTORE, DECREMENT, DONE);
+    signal state : state_type;
+
+    signal A, B, R : unsigned(N-1 downto 0);
+    signal E       : std_logic;
+    signal sc      : integer range 0 to N;
+begin
+    process(clk, reset)
+        variable temp_sum : unsigned(N downto 0);
+    begin
+        if reset = '1' then
+            state <= IDLE;
+            A <= (others => '0');
+            B <= (others => '0');
+            R <= (others => '0');
+            E <= '0';
+            sc <= 0;
+            Quotient <= (others => '0');
+            Remainder <= (others => '0');
+            Overflow <= '0';
+            Ready <= '1';
+        elsif rising_edge(clk) then
+            case state is
+                when IDLE =>
+                    if start = '1' then
+                        R <= unsigned(Dividend(2*N-1 downto N));
+                        A <= unsigned(Dividend(N-1 downto 0));
+                        B <= unsigned(Divisor);
+                        sc <= N;
+                        Ready <= '0';
+                        Overflow <= '0';
+                        state <= OVF_CHECK;
+                    end if;
+
+                when OVF_CHECK =>
+                    temp_sum := ('0' & R) + ('0' & not B) + 1;
+                    if temp_sum(N) = '1' then
+                        Overflow <= '1';
+                        state <= DONE;       
+                    else                      
+                        Overflow <= '0';
+                        state <= SHIFT;
+                    end if;
+
+                when SHIFT =>
+                    E <= R(N-1);
+                    R <= R(N-2 downto 0) & A(N-1);
+                    A <= A(N-2 downto 0) & '0';
+                    state <= SUB_RESTORE;
+
+                when SUB_RESTORE =>
+                    temp_sum := ('0' & R) + ('0' & not B) + 1;
+                    if E = '1' then 
+                        R <= temp_sum(N-1 downto 0);
+                        A(0) <= '1';
+                    else           
+                        if temp_sum(N) = '1' then 
+                            R <= temp_sum(N-1 downto 0);
+                            A(0) <= '1';
+                        else      
+                            A(0) <= '0';
+                        end if;
+                    end if;
+                    state <= DECREMENT;
+                when DECREMENT =>
+                    if sc = 1 then
+                        sc <= 0;
+                        state <= DONE;
+                    else
+                        sc <= sc - 1;
+                        state <= SHIFT;
+                    end if;
+
+                when DONE =>
+                    Quotient <= std_logic_vector(A);
+                    Remainder <= std_logic_vector(R);
+                    Ready <= '1';
+                    state <= IDLE;
+
+            end case;
+        end if;
+    end process;
+end Behavioral;
+===================================================================================
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity tb_Restoring_Divider is
+end tb_Restoring_Divider;
+
+architecture behavior of tb_Restoring_Divider is
+    constant N : integer := 4;
+    signal clk, reset, start : std_logic := '0';
+    signal Dividend : std_logic_vector(2*N-1 downto 0) := (others => '0');
+    signal Divisor  : std_logic_vector(N-1 downto 0) := (others => '0');
+    signal Quotient, Remainder : std_logic_vector(N-1 downto 0);
+    signal Overflow, Ready : std_logic;
+
+    constant clk_period : time := 10 ns;
+begin
+
+    uut: entity work.Restoring_Divider
+        generic map (N => N)
+        port map (
+            clk => clk, reset => reset, start => start,
+            Dividend => Dividend, Divisor => Divisor,
+            Quotient => Quotient, Remainder => Remainder,
+            Overflow => Overflow, Ready => Ready
+        );
+
+
+    clk_process :process
+    begin
+        clk <= '0'; wait for clk_period/2;
+        clk <= '1'; wait for clk_period/2;
+    end process;
+
+ 
+    stim_proc: process
+    begin
+    
+        reset <= '1'; wait for 20 ns;
+        reset <= '0'; wait for 20 ns;
+
+      
+        Dividend <= "00001110"; 
+        Divisor  <= "0100";     
+        start <= '1';
+        wait for clk_period;
+        start <= '0';
+        wait until Ready = '1';
+        wait for 20 ns;
+
+        Dividend <= "00101111"; -- 47
+        Divisor  <= "0011";     -- 3
+        start <= '1';
+        wait for clk_period;
+        start <= '0';
+        wait until Ready = '1';
+        wait for 20 ns;
+
+  
+        Dividend <= "00110010"; -- 50
+        Divisor  <= "0011";     -- 3
+        start <= '1';
+        wait for clk_period;
+        start <= '0';
+        wait until Ready = '1';
+        wait for 20 ns;
+
+
+        Dividend <= "00001010"; -- 10
+        Divisor  <= "0000";     -- 0
+        start <= '1';
+        wait for clk_period;
+        start <= '0';
+        wait until Ready = '1';
+
+        wait;
+    end process;
+end behavior;
+==============================================================================================
+Restoring Divider
+N: عرض داده (پارامتر generic که در اینجا ۴ در نظر گرفته شده است)
+
+ورودی‌ها:
+
+clk: سیگنال ساعت
+
+reset: ریست سنکرون (در سطح بالا)
+
+start: شروع عملیات تقسیم
+
+Dividend: عدد مقسوم (۲N بیتی)
+
+Divisor: عدد مقسوم‌علیه (N بیتی)
+
+خروجی‌ها:
+
+Quotient: خارج قسمت (N بیتی)
+
+Remainder: باقیمانده (N بیتی)
+
+Overflow: پرچم سرریز (زمانی که مقسوم ≥ مقسوم‌علیه × ۲^N)
+
+Ready: آماده بودن مدار برای دریافت داده جدید
+
+3. الگوریتم تقسیم بازیابی
+الگوریتم بازیابی برای تقسیم اعداد بدون علامت به صورت زیر عمل می‌کند (برای N مرحله):
+
+ثبات R (N بیتی) قسمت بالای مقسوم، ثبات A (N بیتی) قسمت پایین مقسوم را نگه می‌دارد. در ابتدا:
+
+R = Dividend(2N-1 downto N)
+
+A = Dividend(N-1 downto 0)
+
+به تعداد N بار:
+
+جفت ثبات {R, A} را یک بیت به چپ شیفت دهید (A یک بیت از R دریافت می‌کند).
+
+مقدار R - B را محاسبه کنید.
+
+اگر نتیجه منفی نبود (بازوی پایانی نداریم)، A(0) = 1 و R = R - B.
+
+اگر نتیجه منفی بود، A(0) = 0 و مقدار قبلی R بازیابی می‌شود (یعنی R تغییر نمی‌کند).
+
+پس از N مرحله، A خارج قسمت و R باقیمانده خواهد بود.
+
+4. معماری پیاده‌سازی شده
+4.1 ماشین حالت
+مدار شامل یک ماشین حالت با وضعیت‌های زیر است:
+
+IDLE: انتظار برای شروع (start=1)
+
+OVF_CHECK: بررسی شرط سرریز اولیه (R ≥ B ?)
+
+SHIFT: شیفت یک بیتی جفت ثبات {R, A}
+
+SUB_RESTORE: تفریق و تعیین بیت خارج قسمت (به همراه بازیابی ضمنی)
+
+DECREMENT: کاهش شمارنده مراحل (sc)
+
+DONE: اتمام عملیات و خروجی‌دهی
+
+4.2 سیگنال‌های داخلی
+A, R, B: از نوع unsigned به ترتیب برای ذخیره بخشی از خارج قسمت، باقیمانده جاری و مقسوم‌علیه.
+
+E: یک بیت که در مرحله SHIFT از بیت بالای R گرفته می‌شود (در این طراحی کاربرد درستی ندارد).
+
+sc: شمارنده مراحل (از N تا 0).
+
+temp_sum: متغیر محلی برای محاسبه R - B (با استفاده از متمم دو).
+
+
+======
+تست بنچ
+تعریف ماژول ها و خود متغییر ها
+تست ۱: ۱۴ ÷ ۴
+خارج‌قسمت 0011 (۳)، باقیمانده 0010 (۲). سرریز صفر.
+
+تست ۲: ۴۷ ÷ ۳
+خارج‌قسمت 1111 (۱۵)، باقیمانده 0010 (۲). سرریز صفر.
+
+تست ۳: ۵۰ ÷ ۳
+خارج‌قسمت ۱۶ نیازمند ۵ بیت است. با N=4 باید پرچم Overflow فعال شود. خروجی Quotient و Remainder معتبر نیستند.
+
+تست ۴: تقسیم بر صفر
+در طراحی فعلی، شرط سرریز تنها R≥B را بررسی می‌کند. با تقسیم‌کننده صفر، B=0 شده و R≥0 همواره برقرار است؛ بنابراین پرچم overflow فعال نخواهد شد. این یک نقص است.
